@@ -12,7 +12,8 @@
       "^build/"
     ],
     "include": [
-      "\\.json"
+      "\\.json",
+      "^server/"
     ]
   },
   "throttle": 100
