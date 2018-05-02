@@ -15,4 +15,4 @@ Changes that were done to better integrate with Glitch:
 * A custom `watch.json` file was added so that the server doesn't restart when you make changes.
 * The `start` script in the `package.json` file was changed. if you run `npm run build` using the **Logs > Console** and then add `NODE_ENV=production` in the `.env` file, then Glitch will serve the production build version of your app!
 
-For faster boot times when your app goes to sleep and wakes up, you may rename the `devDependencies` key in your `package.json` file to `_devDependencies`, so that it gets are ignored. They aren't needed, as in production static files inside your `build` are used. To see the contents of this folder, open the **Logs > Console** and run `ls build`.
+For faster boot times when your app goes to sleep and wakes up, you may rename the `devDependencies` key in your `package.json` file to `_devDependencies`, so those get ignored. They aren't needed, as in production static files inside your `build` are used. To see the contents of this folder, open the **Logs > Console** and run `ls build`.
