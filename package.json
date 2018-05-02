@@ -7,7 +7,7 @@
     "react": "^16.3.0",
     "react-dom": "^16.3.0"
   },
-  "proxy": "https://closed-tire.glitch.me",
+  "proxy": "https://create-react-app-demo.glitch.me",
   "devDependencies": {
     "react-scripts": "0.9.5"
   },
