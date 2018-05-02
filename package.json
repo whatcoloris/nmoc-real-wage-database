@@ -2,20 +2,14 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "create-react-app": "^1.5.2",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
-  },
   "proxy": "https://create-react-app-demo.glitch.me",
-  "devDependencies": {
-    "react-scripts": "0.9.5"
-  },
-  "engines": {
-    "node": "8.x"
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "^1.1.4"
   },
   "scripts": {
-    "start": "node server/index.js & react-scripts start"
+    "start": "react-scripts start"
   },
   "license": "MIT"
 }
