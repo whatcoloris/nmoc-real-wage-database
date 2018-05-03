@@ -12,7 +12,7 @@
     "react-scripts": "^1.1.4"
   },
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run -s prod:start || npm run -s dev:start",
+    "start": "if-env NODE_ENV=production && npm run prod:start || npm run dev:start",
     "dev:start": "react-scripts start",
     "prod:start": "static build --gzip",
     "build": "react-scripts build && gzip -rk build && refresh"
