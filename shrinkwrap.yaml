@@ -8216,7 +8216,7 @@ packages:
     resolution:
       integrity: sha1-YpmpBVsc78lp/355wdkY3Osiw2A=
 registry: 'https://registry.npmjs.org/'
-shrinkwrapMinorVersion: 5
+shrinkwrapMinorVersion: 7
 shrinkwrapVersion: 3
 specifiers:
   if-env: ^1.0.4
