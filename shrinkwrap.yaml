@@ -1735,7 +1735,6 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha1-qv+81qr4VLROuygDU9WtFlH1mmk=
-      tarball: 'http://registry.npmjs.org/compression/-/compression-1.7.2.tgz'
   /concat-map/0.0.1:
     resolution:
       integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
@@ -2792,7 +2791,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-SrTJoPWlTbkzi0w02Gv86PSzVXE=
-      tarball: 'http://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz'
   /eventemitter3/3.1.0:
     dev: true
     resolution:
