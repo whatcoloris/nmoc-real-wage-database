@@ -66,7 +66,10 @@ const styles = (theme) =>
   });
 
 const blankValidator = (value) => value.length === 0;
-const descriptionValidator = (value) => value.split(' ').length > 401;
+const descriptionValidator = (value) => {
+  const current_length = value.trim().split(/\s+/).length;
+  return current_length > 400 || current_length < 2;
+};
 
 const project_form = {
   items: [
@@ -248,7 +251,8 @@ class App extends React.Component {
           item.error = item.validator(event.target.value)
           item.helperText = item.error ? 'Required' : ''
           if(item.id === 'description'){
-            item.helperText += ` ${event.target.value.split(' ').length} / 400`
+            const current_length = event.target.value.trim().split(/\s+/).length;
+            item.helperText = `${item.error ? current_length > 1 ? 'Too long!' : 'Required' : ''} ${current_length} / 400`
           }
         }
         return prevState;
@@ -330,7 +334,7 @@ class App extends React.Component {
                   }}
                   margin="normal"
                   required={field.required}
-                  rowsMax={field.id === "description" ? 24 : 1}
+                  rowsMax={field.id === "description" ? 32 : 1}
                   multiline={field.id === "description"}
                   helperText={field.helperText}
                   error={field.error}
