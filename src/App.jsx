@@ -12,6 +12,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import withRoot from "./withRoot";
@@ -234,6 +235,7 @@ class App extends React.Component {
       project_form: project_form
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleChange(event, idx) {
@@ -253,7 +255,18 @@ class App extends React.Component {
       });
   };
   
-  
+  handleSelect(event, key) {
+    console.log('handleSelect event:',event,' key:',key)
+    event.persist();
+    this.setState(
+      (prevState) => {
+        if(prevState.project_form[key]) {
+          prevState.project_form[key] = event.target.value;
+        }
+        return prevState;
+      }, () => console.log('state now:', this.state)
+    );
+  }
 
   render() {
     const { classes } = this.props;
@@ -332,9 +345,8 @@ class App extends React.Component {
                 aria-label="Already Submitted"
                 name="already_submitted"
                 className={classes.group}
-                value={this.state.value}
-                onChange={this.handleChange}
-              >
+                value={this.state.project_form.already_submitted}
+                onChange={(event) => this.handleSelect(event, 'already_submitted')}>
                 <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                 <FormControlLabel value="no" control={<Radio />} label="No" />
               </RadioGroup>
@@ -345,16 +357,26 @@ class App extends React.Component {
               <FormGroup>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={this.state.project_form.wants_to_get_involved} onChange={this.handleChange('wants_to_get_involved')} value={true} />
+                    <Checkbox checked={this.state.project_form.wants_to_get_involved} onChange={(event) => this.handleSelect(event, 'wants_to_get_involved')} value="yes" />
                   }
-                  label="Yes"
-                />
+                  label="Yes" />
 
               </FormGroup>
             </FormControl>
             
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">If you are interested in hosting an Emergency Index-related event, check the box below.</FormLabel>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={this.state.project_form.wants_to_host} onChange={(event) => this.handleSelect(event, 'wants_to_host')} value="yes" />
+                  }
+                  label="Yes" />
+
+              </FormGroup>
+            </FormControl>
             
-wants_to_host
+
 
             <div className={classes.divider}>
               <Divider variant="middle" />
