@@ -1,20 +1,12 @@
 
 import * as React from "react";
 // import Button from '@material-ui/core/Button';
-// import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-// import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-// import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import createStyles from "@material-ui/core/styles/createStyles";
-import withStyles from "@material-ui/core/styles/withStyles"; // , { WithStyles }
+import withStyles from "@material-ui/core/styles/withStyles";
 import withRoot from "./withRoot";
 import TextField from "@material-ui/core/TextField";
-// import { ProjectForm, ProjectTextField } from "../project";
 import FormField from "./FormField";
 
 const styles = (theme) =>
@@ -43,9 +35,6 @@ const styles = (theme) =>
     label: {},
     help: {}
   });
-
-// const collaborator = [{ name: "" }];
-// const link = [{ url: "" }];
 
 const blankValidator = (value) => value.length > 0;
 
@@ -242,11 +231,6 @@ const project_form = {
   ]
 };
 
-/* (WithStyles, {
-  project_form: ProjectForm
-  // errors: [{[key: keyof Project]: boolean}]
-})
-*/
 class App extends React.Component {
   state = {
     project_form: project_form
@@ -305,8 +289,7 @@ class App extends React.Component {
               label={field.label}
               help={field.help}
               required={field.required}
-              key={idx}
-            >
+              key={idx} >
               <TextField
                 value={field.value}
                 id={field.id}
@@ -320,8 +303,7 @@ class App extends React.Component {
                 required={field.required}
                 rowsMax={field.id === "description" ? 24 : 1}
                 multiline={field.id === "description"}
-                fullWidth
-              />
+                fullWidth />
             </FormField>
           ))}
 
@@ -351,9 +333,5 @@ class App extends React.Component {
     );
   }
 }
-
-// Index.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
 
 export default withRoot(withStyles(styles)(App));
