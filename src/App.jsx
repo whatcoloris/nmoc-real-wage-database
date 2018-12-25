@@ -5,8 +5,10 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import createStyles from "@material-ui/core/styles/createStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
-import withRoot from "./withRoot";
+import Divider from '@material-ui/core/Divider';
 import TextField from "@material-ui/core/TextField";
+
+import withRoot from "./withRoot";
 import FormField from "./FormField";
 
 const styles = (theme) =>
@@ -37,6 +39,10 @@ const styles = (theme) =>
     textField: {},
     label: {},
     help: {},
+    divider: {
+      margin: '2em 0',
+      width: '100%'
+    },
     footer: {
       textAlign: 'right',
       margin: '1em 1em 0'
@@ -248,7 +254,7 @@ class App extends React.Component {
           Vol. 8 Submissions
         </Typography>
         <Typography variant="h4" component="h4" className={classes.beta}>
-          NOTE: this is just a test form! don't submit actual performance. 
+          NOTE: this is just a test form! <br />don't submit actual performance. 
         </Typography>
         <Typography component="p" className={classes.info}>
           Emergency INDEX allows you to report and document novel strategies,
@@ -326,15 +332,15 @@ class App extends React.Component {
             <input type="file" />
           </FormField>
           
-          <div>
-            <hr/>
+          <div className={classes.divider}>
+            <Divider variant="middle" />
           </div>
           
-          <Button variant="contained" color="primary" fullWidth>Submit</Button>
+          <Button variant="contained" color="primary" size="large" fullWidth>Submit</Button>
         </form>
       </Paper>
       <footer className={classes.footer}>
-        <a href="https://github.com/edwardsharp" target="_blank" rel="nofollow" className={classes.footerLink}>Made with 🖤 in NYC</a>
+        <a href="https://github.com/edwardsharp" target="_blank" rel="noopener noreferrer" className={classes.footerLink}>Made with <span role="img" aria-label="black heart">🖤</span> in NYC</a>
       </footer>
       </React.Fragment>
     );
