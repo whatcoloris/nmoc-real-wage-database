@@ -10,8 +10,6 @@ import TextField from "@material-ui/core/TextField";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -47,7 +45,7 @@ const styles = (theme) =>
     label: {},
     help: {},
     formControl: {
-      margin: theme.spacing.unit * 3,
+      margin: `${theme.spacing.unit * 3} 0`,
     },
     group: {
       margin: `${theme.spacing.unit}px 0`,
@@ -68,6 +66,7 @@ const styles = (theme) =>
   });
 
 const blankValidator = (value) => value.length === 0;
+const descriptionValidator = (value) => value.split(' ').length > 401;
 
 const project_form = {
   items: [
@@ -211,7 +210,7 @@ const project_form = {
       value: "",
       required: true,
       error: false,
-      validator: blankValidator
+      validator: descriptionValidator
     },{
       id: "photo_credit",
       label: "Photo Credit",
@@ -249,7 +248,7 @@ class App extends React.Component {
           item.error = item.validator(event.target.value)
           item.helperText = item.error ? 'Required' : ''
           if(item.id === 'description'){
-            item.helperText += ` ${event.target.value.length} / 666`
+            item.helperText += ` ${event.target.value.split(' ').length} / 400`
           }
         }
         return prevState;
@@ -262,7 +261,7 @@ class App extends React.Component {
       (prevState) => {
         prevState.project_form[key] = event.target.value;
         return prevState;
-      }
+      }, () => console.log('state now', this.state)
     );
   }
   
@@ -272,7 +271,7 @@ class App extends React.Component {
       (prevState) => {
         prevState.project_form[key] = event.target.checked;
         return prevState;
-      }
+      }, () => console.log('state now', this.state)
     );
   }
 
@@ -346,45 +345,45 @@ class App extends React.Component {
               <br/>
               <input type="file" />
             </FormField>
-            
-            <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?</FormLabel>
+
+            <FormField
+              label="Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?"
+              help=""
+              required>
               <RadioGroup
                 aria-label="Already Submitted"
                 name="already_submitted"
                 className={classes.group}
-                value={this.state.project_form.already_submitted}
                 onChange={(event) => this.handleRadio(event, 'already_submitted')}>
                 <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                 <FormControlLabel value="no" control={<Radio />} label="No" />
               </RadioGroup>
-            </FormControl>
-            
-            <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">If you are interested in getting involved in the production of Emergency Index, please check the box below.</FormLabel>
+            </FormField>
+
+            <FormField
+              label="If you are interested in getting involved in the production of Emergency Index, please check the box below."
+              help="">
               <FormGroup>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={this.state.project_form.wants_to_get_involved} onChange={(event) => this.handleCheckbox(event, 'wants_to_get_involved')} value="yes" />
+                    <Checkbox onChange={(event) => this.handleCheckbox(event, 'wants_to_get_involved')} value="yes" />
                   }
                   label="Yes" />
-
               </FormGroup>
-            </FormControl>
+            </FormField>
             
-            <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">If you are interested in hosting an Emergency Index-related event, check the box below.</FormLabel>
+   
+            <FormField
+              label="If you are interested in hosting an Emergency Index-related event, check the box below."
+              help="">
               <FormGroup>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={this.state.project_form.wants_to_host} onChange={(event) => this.handleCheckbox(event, 'wants_to_host')} value="yes" />
+                    <Checkbox onChange={(event) => this.handleCheckbox(event, 'wants_to_host')} value="yes" />
                   }
                   label="Yes" />
-
               </FormGroup>
-            </FormControl>
-            
-
+            </FormField>
 
             <div className={classes.divider}>
               <Divider variant="middle" />
