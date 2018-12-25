@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "node-static": "^0.7.10",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "express": "^4.16.4"
   },
   "devDependencies": {
     "react": "^16.3.2",
@@ -14,7 +14,7 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run prod:start || npm run dev:start",
     "dev:start": "react-scripts start",
-    "prod:start": "static build --gzip",
+    "prod:start": "npm server.js",
     "build": "react-scripts build && gzip -rk build && refresh"
   },
   "license": "MIT"
