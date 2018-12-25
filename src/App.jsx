@@ -1,5 +1,4 @@
 
-import './App.css';
 import * as React from "react";
 // import Button from '@material-ui/core/Button';
 // import Dialog from '@material-ui/core/Dialog';
@@ -10,13 +9,13 @@ import * as React from "react";
 // import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
+// import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import createStyles from "@material-ui/core/styles/createStyles";
-import withStyles, { WithStyles } from "@material-ui/core/styles/withStyles";
-import withRoot from "../withRoot";
+import withStyles from "@material-ui/core/styles/withStyles"; // , { WithStyles }
+import withRoot from "./withRoot";
 import TextField from "@material-ui/core/TextField";
-import { ProjectForm, ProjectTextField } from "../project";
-import FormField from "../components/form_field";
+// import { ProjectForm, ProjectTextField } from "../project";
+import FormField from "./FormField";
 
 const styles = (theme) =>
   createStyles({
@@ -45,8 +44,8 @@ const styles = (theme) =>
     help: {}
   });
 
-const collaborator = [{ name: "" }];
-const link = [{ url: "" }];
+// const collaborator = [{ name: "" }];
+// const link = [{ url: "" }];
 
 const blankValidator = (value) => value.length > 0;
 
@@ -249,9 +248,9 @@ const project_form = {
 })
 */
 class App extends React.Component {
-  // state = {
-  //   project_form: project_form
-  // };
+  state = {
+    project_form: project_form
+  };
 
   handleChange = (idx) => (
     event
@@ -264,7 +263,7 @@ class App extends React.Component {
         }
         return prevState;
       },
-      () => console.log("event.target:", event.target)
+      () => console.log("state:", this.state)
     );
   };
 
@@ -357,4 +356,4 @@ class App extends React.Component {
 //   classes: PropTypes.object.isRequired,
 // };
 
-export default withRoot(withStyles(styles)(Index));
+export default withRoot(withStyles(styles)(App));
