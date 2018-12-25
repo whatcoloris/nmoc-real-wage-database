@@ -9,7 +9,7 @@ const styles = (theme) =>
     root: { marginTop: theme.spacing.unit * 4, width: "100%" },
     required: { color: "red" },
     label: { lineHeight: 1.25 },
-    help: {}
+    help: { color: '#666' }
   });
 
 // interface Props {
