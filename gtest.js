@@ -6,6 +6,8 @@ const { google } = require('googleapis')
 const scopes = [
   'https://www.googleapis.com/auth/drive',
   'https://www.googleapis.com/auth/drive.file',
+  'https://www.googleapis.com/auth/drive.metadata',
+  // 'https://www.googleapis.com/auth/drive.photos',
   'https://www.googleapis.com/auth/spreadsheets'
 ]
 const jwt = new google.auth.JWT(
@@ -16,6 +18,11 @@ const jwt = new google.auth.JWT(
 )
 const spreadsheetId = '1hmEYFZlpf0GV1kG2lZophXwzUSKL20v6nDycJVElAcs'
 const range = 'Sheet1!A1:Z1'
+const folderId = '197tH3AXOSgtHawh4Rmp_dT9k9hjtWafl';
+const fileMetadata = {
+  'name': 'test',
+  parents: [folderId]
+};
 
 jwt.authorize((err, response) => {
   google.sheets({
@@ -44,6 +51,7 @@ jwt.authorize((err, response) => {
       title: 'Test',
       mimeType: 'text/plain',
     },
+    resource: fileMetadata,
     media: {
       mimeType: 'text/plain',
       body: 'Hello World!',
