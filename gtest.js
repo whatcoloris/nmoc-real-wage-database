@@ -83,20 +83,24 @@ jwt.authorize((err, response) => {
       console.log('gdrive  success! result:', result)
       
       
-      google.drive('v3').permissions.create({
-        resource: permission,
-        fileId: fileId,
-        fields: 'id',
-      }, function (err, res) {
-        if (err) {
-          // Handle error...
-          console.error(err);
-          permissionCallback(err);
-        } else {
-          console.log('Permission ID: ', res.id)
-          permissionCallback();
-        }
-      })
+      // google.drive('v3').permissions.create({
+      //   resource: [
+      //     {
+      //       'type': 'user',
+      //       'role': 'writer',
+      //       'emailAddress': 'edward@edwardsharp.net'
+      //     }
+      //   ],
+      //   fileId: fileId,
+      //   fields: 'id',
+      // }, function (err, res) {
+      //   if (err) {
+      //     // Handle error...
+      //     console.error('error setting file permissionz', err);
+      //   } else {
+      //     console.log('Permission ID: ', res.id)
+      //   }
+      // })
       
     }
   })
