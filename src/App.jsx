@@ -51,7 +51,6 @@ const styles = (theme) =>
       color: 'black',
       textDecoration: 'none',
       fontSize: '0.75em'
-      
     }
   });
 
