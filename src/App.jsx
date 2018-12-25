@@ -48,8 +48,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "contact_email",
       label: "Contact Email",
       help:
@@ -58,8 +57,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "contact_postal",
       label: "POSTAL ADDRESS OF CONTACT",
       help: "This will not be published. A postal address is required.",
@@ -67,8 +65,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "contact_phone",
       label: "CONTACT PHONE NUMBER",
       help: "This will not be published. A phone number is required.",
@@ -76,8 +73,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "title",
       label: "TITLE OF PIECE (PLEASE WRITE IN ALL CAPS)",
       help: "",
@@ -85,8 +81,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "contributor",
       label: "NAME(S) OF CREATOR(S) OR GROUP (PLEASE WRITE IN ALL CAPS)",
       help:
@@ -95,8 +90,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "already_submitted",
       label:
         "Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?",
@@ -105,8 +99,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "collaborators",
       label: "Names(s) of Other Key Collaborators (Please write in Title Case)",
       help:
@@ -115,8 +108,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "date_first_performed",
       label: "Date of First Performance",
       help:
@@ -125,8 +117,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "times_performed",
       label: "How many times was it performed in 2018?",
       help:
@@ -135,8 +126,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "venue",
       label: "Venue where the first performance occurred.",
       help:
@@ -145,8 +135,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "city",
       label: "City where the first performance occurred.",
       help: "",
@@ -154,8 +143,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "state_country",
       label: "Country (or state) where the first performance occurred.",
       help:
@@ -164,8 +152,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "home",
       label:
         "Where are the creators based? City, State (if in the US), and Country (if outside of the US).",
@@ -185,8 +172,7 @@ const project_form = {
       required: false,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "links",
       label: "Creator(s)/Group website (to be published; optional)",
       help:
@@ -195,8 +181,7 @@ const project_form = {
       required: false,
       error: false,
       validator: blankValidator
-    },
-    {
+    },{
       id: "description",
       label: "Description of performance",
       help:
@@ -205,18 +190,7 @@ const project_form = {
       required: true,
       error: false,
       validator: blankValidator
-    },
-    {
-      id: "photo_url",
-      label: "Photo",
-      help:
-        "The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file.",
-      value: "",
-      required: true,
-      error: false,
-      validator: blankValidator
-    },
-    {
+    },{
       id: "photo_credit",
       label: "Photo Credit",
       help:
@@ -259,6 +233,9 @@ class App extends React.Component {
         <Typography variant="h4" component="h4" className={classes.headline}>
           Vol. 8 Submissions
         </Typography>
+        <Typography variant="h4" component="h4" className={classes.beta}>
+          NOTE: this is j
+        </Typography>
         <Typography component="p" className={classes.info}>
           Emergency INDEX allows you to report and document novel strategies,
           innovations and ideas in a performance-based work you made in 2018. To
@@ -291,6 +268,7 @@ class App extends React.Component {
               <TextField
                 value={field.value}
                 id={field.id}
+                type={field.id.match(/date/) ? "date" : "text"}
                 className={classes.textField}
                 onChange={this.handleChange(idx)}
                 placeholder="Your Answer"
@@ -330,10 +308,15 @@ class App extends React.Component {
             label="Photo"
             help="The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file"
             required >
+            <br/>
             <input type="file" />
           </FormField>
           
-          <Button>Submit</Button>
+          <div>
+            <hr/>
+          </div>
+          
+          <Button fullWidth>Submit</Button>
         </form>
       </Paper>
     );
