@@ -235,7 +235,8 @@ class App extends React.Component {
       project_form: project_form
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
+    this.handleRadio = this.handleRadio.bind(this);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
   }
 
   handleChange(event, idx) {
@@ -255,16 +256,23 @@ class App extends React.Component {
       });
   };
   
-  handleSelect(event, key) {
-    console.log('handleSelect event:',event,' key:',key)
+  handleRadio(event, key) {
     event.persist();
     this.setState(
       (prevState) => {
-        if(prevState.project_form[key]) {
-          prevState.project_form[key] = event.target.value;
-        }
+        prevState.project_form[key] = event.target.value;
         return prevState;
-      }, () => console.log('state now:', this.state)
+      }
+    );
+  }
+  
+  handleCheckbox(event, key) {
+    event.persist();
+    this.setState(
+      (prevState) => {
+        prevState.project_form[key] = event.target.checked;
+        return prevState;
+      }
     );
   }
 
@@ -346,7 +354,7 @@ class App extends React.Component {
                 name="already_submitted"
                 className={classes.group}
                 value={this.state.project_form.already_submitted}
-                onChange={(event) => this.handleSelect(event, 'already_submitted')}>
+                onChange={(event) => this.handleRadio(event, 'already_submitted')}>
                 <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                 <FormControlLabel value="no" control={<Radio />} label="No" />
               </RadioGroup>
@@ -357,7 +365,7 @@ class App extends React.Component {
               <FormGroup>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={this.state.project_form.wants_to_get_involved} onChange={(event) => this.handleSelect(event, 'wants_to_get_involved')} value="yes" />
+                    <Checkbox checked={this.state.project_form.wants_to_get_involved} onChange={(event) => this.handleCheckbox(event, 'wants_to_get_involved')} value="yes" />
                   }
                   label="Yes" />
 
@@ -369,7 +377,7 @@ class App extends React.Component {
               <FormGroup>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={this.state.project_form.wants_to_host} onChange={(event) => this.handleSelect(event, 'wants_to_host')} value="yes" />
+                    <Checkbox checked={this.state.project_form.wants_to_host} onChange={(event) => this.handleCheckbox(event, 'wants_to_host')} value="yes" />
                   }
                   label="Yes" />
 
