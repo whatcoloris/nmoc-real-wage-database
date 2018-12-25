@@ -222,17 +222,19 @@ const project_form = {
 };
 
 class App extends React.Component {
-  state = {
-    project_form: project_form
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      project_form: project_form
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-  handleChange = (idx) => (
-    event
-  ) => {
+  handleChange(event, idx) {
     event.persist();
     this.setState(
       (prevState) => {
-        let item = prevState.project_form.items[idx]
+        const item = prevState.project_form.items[idx]
         if (item) {
           item.value = event.target.value;
           item.error = item.validator(event.target.value)
@@ -240,116 +242,98 @@ class App extends React.Component {
           if(item.id === 'description'){
             item.helperText += ` ${event.target.value.length} / 666`
           }
-          
         }
         return prevState;
-      },
-      () => console.log("state:", this.state)
-    );
+      });
   };
 
   render() {
     const { classes } = this.props;
     return (
       <React.Fragment>
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="h3" component="h3" className={classes.headline}>
-          Emergency INDEX
-        </Typography>
-        <Typography variant="h4" component="h4" className={classes.headline}>
-          Vol. 8 Submissions
-        </Typography>
-        <Typography variant="h4" component="h4" className={classes.beta}>
-          NOTE: this is just a test form! <br />don't submit actual performance. 
-        </Typography>
-        <Typography component="p" className={classes.info}>
-          Emergency INDEX allows you to report and document novel strategies,
-          innovations and ideas in a performance-based work you made in 2018. To
-          submit a performance for INDEX Vol. 8, please fill out the form below.
-          Once you complete this form, you will also need to email an image to
-          accompany your submission; details on this are below.
-        </Typography>
-        <Typography className={classes.info} component="p">
-          Guidelines are adjacent to each prompt; please read them carefully.
-          You may want to prepare your *performance description* on a separate
-          word document first and then cut-and-paste the final draft into the
-          field below. If you have questions, please see our FAQ page, or email
-          us at emergencyindex2018@gmail.com. The deadline is 
-          <b> January 6, 2019 at midnight PST</b>; this deadline is strict, and
-          we cannot consider submissions sent after this date. Please submit
-          only one work; authors and collectives who submit more than one work
-          will be disqualified. Please read all the instructions, and follow the
-          guidelines carefully.
-        </Typography>
-        <Typography className={classes.required} component="p">
-          * Required
-        </Typography>
-        <form className={classes.container} noValidate autoComplete="off">
-          {project_form.items.map((field, idx) => (
-            <FormField
-              label={field.label}
-              help={field.help}
-              required={field.required}
-              key={idx} >
-              <TextField
-                value={field.value}
-                id={field.id}
-                type={field.id.match(/date/) ? "date" : "text"}
-                className={classes.textField}
-                onChange={this.handleChange(idx)}
-                placeholder="Your Answer"
-                InputLabelProps={{
-                  shrink: true
-                }}
-                margin="normal"
+        <Paper className={classes.root} elevation={1}>
+          <Typography variant="h3" component="h3" className={classes.headline}>
+            Emergency INDEX
+          </Typography>
+          <Typography variant="h4" component="h4" className={classes.headline}>
+            Vol. 8 Submissions
+          </Typography>
+          <Typography variant="h4" component="h4" className={classes.beta}>
+            NOTE: this is just a test form! <br />don't submit actual performance. 
+          </Typography>
+          <Typography component="p" className={classes.info}>
+            Emergency INDEX allows you to report and document novel strategies,
+            innovations and ideas in a performance-based work you made in 2018. To
+            submit a performance for INDEX Vol. 8, please fill out the form below.
+            Once you complete this form, you will also need to email an image to
+            accompany your submission; details on this are below.
+          </Typography>
+          <Typography className={classes.info} component="p">
+            Guidelines are adjacent to each prompt; please read them carefully.
+            You may want to prepare your *performance description* on a separate
+            word document first and then cut-and-paste the final draft into the
+            field below. If you have questions, please see our FAQ page, or email
+            us at emergencyindex2018@gmail.com. The deadline is 
+            <b> January 6, 2019 at midnight PST</b>; this deadline is strict, and
+            we cannot consider submissions sent after this date. Please submit
+            only one work; authors and collectives who submit more than one work
+            will be disqualified. Please read all the instructions, and follow the
+            guidelines carefully.
+          </Typography>
+          <Typography className={classes.required} component="p">
+            * Required
+          </Typography>
+          <form className={classes.container} noValidate autoComplete="off">
+            {project_form.items.map((field, idx) => (
+              <FormField
+                label={field.label}
+                help={field.help}
                 required={field.required}
-                rowsMax={field.id === "description" ? 24 : 1}
-                multiline={field.id === "description"}
-                helperText={field.helperText}
-                error={field.error}
-                fullWidth />
-            </FormField>
-          ))}
+                key={idx}>
+                <TextField
+                  value={field.value}
+                  id={field.id}
+                  type={field.id.match(/date/) ? "date" : "text"}
+                  className={classes.textField}
+                  onChange={(event) => this.handleChange(event, idx)}
+                  placeholder="Your Answer"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  margin="normal"
+                  required={field.required}
+                  rowsMax={field.id === "description" ? 24 : 1}
+                  multiline={field.id === "description"}
+                  helperText={field.helperText}
+                  error={field.error}
+                  fullWidth />
+              </FormField>
+            ))}
 
-          {/* <TextField
-          id="select-currency"
-          select
-          label="Select"
-          className={classes.textField}
-          value={this.state.currency}
-          onChange={this.handleChange('currency')}
-          SelectProps={{
-            MenuProps: {
-              className: classes.menu,
-            },
-          }}
-          helperText="Please select your currency"
-          margin="normal"
-        >
-          {currencies.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField> */}
-          <FormField
-            label="Photo"
-            help="The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file"
-            required >
-            <br/>
-            <input type="file" />
-          </FormField>
-          
-          <div className={classes.divider}>
-            <Divider variant="middle" />
-          </div>
-          
-          <Button variant="contained" color="primary" size="large" fullWidth>Submit</Button>
-        </form>
-      </Paper>
-      <footer className={classes.footer}>
-        <a href="https://github.com/edwardsharp" target="_blank" rel="noopener noreferrer" className={classes.footerLink}>Made with <span role="img" aria-label="black heart">🖤</span> in NYC</a>
-      </footer>
+            <FormField
+              label="Photo"
+              help="The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file"
+              required>
+              <br/>
+              <input type="file" />
+            </FormField>
+
+            <div className={classes.divider}>
+              <Divider variant="middle" />
+            </div>
+
+            <Button variant="contained" color="primary" size="large" fullWidth>Submit</Button>
+          </form>
+        </Paper>
+        <footer className={classes.footer}>
+          <a 
+            href="https://github.com/edwardsharp" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={classes.footerLink}>
+            Made with <span role="img" aria-label="black heart">🖤</span> in NYC
+          </a>
+        </footer>
       </React.Fragment>
     );
   }
