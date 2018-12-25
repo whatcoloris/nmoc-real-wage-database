@@ -1,6 +1,6 @@
 
 import * as React from "react";
-// import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import createStyles from "@material-ui/core/styles/createStyles";
@@ -326,6 +326,14 @@ class App extends React.Component {
             </MenuItem>
           ))}
         </TextField> */}
+          <FormField
+            label="Photo"
+            help="The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file"
+            required >
+            <input type="file" />
+          </FormField>
+          
+          <Button>Submit</Button>
         </form>
       </Paper>
     );
