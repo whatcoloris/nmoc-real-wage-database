@@ -46,23 +46,42 @@ jwt.authorize((err, response) => {
     }
   })
   
-  google.drive('v3').files.create({
-    requestBody: {
-      title: 'Test',
-      mimeType: 'text/plain',
-    },
-    resource: fileMetadata,
-    media: {
-      mimeType: 'text/plain',
-      body: 'Hello World!',
-    },
+  google.drive('v3').files.list({
+    pageSize: 10,
+    fields: 'nextPageToken, files(id, name)',
     auth: jwt,
-  }, (err, result) => { 
-    if(err){
-      console.log('o noz! gdrive error!')
-      console.log(err)
-    }else{
-      console.log('gdrive  success!') 
+  }, (err, res) => {
+    if (err) return console.log('The gdrive API returned an error: ' + err);
+    const files = res.data.files;
+    if (files.length) {
+      console.log('Files:');
+      files.map((file) => {
+        console.log(`${file.name} (${file.id})`);
+      });
+    } else {
+      console.log('No gdrive files found.');
     }
   });
+  
+  // google.drive('v3').files.create({
+  //   requestBody: {
+  //     title: 'Test',
+  //     mimeType: 'text/plain',
+  //     resource: fileMetadata
+  //   },
+  //   media: {
+  //     mimeType: 'text/plain',
+  //     body: 'Hello World!',
+  //   },
+  //   auth: jwt
+  // }, (err, result) => { 
+  //   if(err){
+  //     console.log('o noz! gdrive error!')
+  //     console.log(err)
+  //   }else{
+  //     console.log('gdrive  success!') 
+  //   }
+  // })
+  
+  
 })
