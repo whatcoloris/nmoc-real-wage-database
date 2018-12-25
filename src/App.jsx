@@ -55,7 +55,7 @@ const styles = (theme) =>
     }
   });
 
-const blankValidator = (value) => value.length > 0;
+const blankValidator = (value) => value.length === 0;
 
 const project_form = {
   items: [
@@ -233,8 +233,15 @@ class App extends React.Component {
     event.persist();
     this.setState(
       (prevState) => {
-        if (prevState.project_form.items[idx]) {
-          prevState.project_form.items[idx].value = event.target.value;
+        let item = prevState.project_form.items[idx]
+        if (item) {
+          item.value = event.target.value;
+          item.error = item.validator(event.target.value)
+          item.helperText = item.error ? 'Required' : ''
+          if(item.id === 'description'){
+            item.helperText += ` ${event.target.value.length} / 666`
+          }
+          
         }
         return prevState;
       },
@@ -299,6 +306,7 @@ class App extends React.Component {
                 required={field.required}
                 rowsMax={field.id === "description" ? 24 : 1}
                 multiline={field.id === "description"}
+                helperText={field.helperText}
                 fullWidth />
             </FormField>
           ))}
