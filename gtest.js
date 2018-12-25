@@ -6,7 +6,7 @@ const { google } = require('googleapis')
 const scopes = [
   'https://www.googleapis.com/auth/drive',
   'https://www.googleapis.com/auth/drive.file',
-  'https://www.googleapis.com/auth/spreadsheets',
+  'https://www.googleapis.com/auth/spreadsheets'
 ]
 const jwt = new google.auth.JWT(
   process.env.CLIENT_EMAIL,
@@ -14,13 +14,11 @@ const jwt = new google.auth.JWT(
   process.env.PRIVATE_KEY,
   scopes
 )
-
 const spreadsheetId = '1hmEYFZlpf0GV1kG2lZophXwzUSKL20v6nDycJVElAcs'
 const range = 'Sheet1!A1:Z1'
 
 jwt.authorize((err, response) => {
-  
-  const res = google.sheets({
+  google.sheets({
     version: 'v4',
     auth: jwt,
   }).spreadsheets.values.append({
@@ -34,11 +32,29 @@ jwt.authorize((err, response) => {
     },
   }, (err, result) => { 
     if(err){
-      console.log('o noz! error!')
+      console.log('o noz! gsheet error!')
       console.log(err)
     }else{
-      console.log('success!') 
+      console.log('gsheet append success!') 
+    }
+  })
+  
+  google.drive('v3').files.create({
+    requestBody: {
+      title: 'Test',
+      mimeType: 'text/plain',
+    },
+    media: {
+      mimeType: 'text/plain',
+      body: 'Hello World!',
+    },
+    auth: jwt,
+  }, (err, result) => { 
+    if(err){
+      console.log('o noz! gdrive error!')
+      console.log(err)
+    }else{
+      console.log('gdrive  success!') 
     }
   });
-
 })
