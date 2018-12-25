@@ -27,13 +27,26 @@ const styles = (theme) =>
     headline: {
       marginBottom: theme.spacing.unit * 2
     },
+    beta: {
+      color: '#f1f'
+    },
     info: {
       marginTop: theme.spacing.unit * 2
     },
     required: { marginTop: theme.spacing.unit * 2, color: "red" },
     textField: {},
     label: {},
-    help: {}
+    help: {},
+    footer: {
+      textAlign: 'right',
+      margin: '1em 1em 0'
+    },
+    footerLink: {
+      color: 'black',
+      textDecoration: 'none',
+      fontSize: '0.75em'
+      
+    }
   });
 
 const blankValidator = (value) => value.length > 0;
@@ -226,6 +239,7 @@ class App extends React.Component {
   render() {
     const { classes } = this.props;
     return (
+      <React.Fragment>
       <Paper className={classes.root} elevation={1}>
         <Typography variant="h3" component="h3" className={classes.headline}>
           Emergency INDEX
@@ -234,7 +248,7 @@ class App extends React.Component {
           Vol. 8 Submissions
         </Typography>
         <Typography variant="h4" component="h4" className={classes.beta}>
-          NOTE: this is j
+          NOTE: this is just a test form! don't submit actual performance. 
         </Typography>
         <Typography component="p" className={classes.info}>
           Emergency INDEX allows you to report and document novel strategies,
@@ -316,9 +330,13 @@ class App extends React.Component {
             <hr/>
           </div>
           
-          <Button fullWidth>Submit</Button>
+          <Button variant="contained" color="primary" fullWidth>Submit</Button>
         </form>
       </Paper>
+      <footer className={classes.footer}>
+        <a href="https://github.com/edwardsharp" target="_blank" rel="nofollow" className={classes.footerLink}>Made with 🖤 in NYC</a>
+      </footer>
+      </React.Fragment>
     );
   }
 }
