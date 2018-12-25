@@ -307,6 +307,7 @@ class App extends React.Component {
                 rowsMax={field.id === "description" ? 24 : 1}
                 multiline={field.id === "description"}
                 helperText={field.helperText}
+                error={field.error}
                 fullWidth />
             </FormField>
           ))}
