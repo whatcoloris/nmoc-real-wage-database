@@ -4,6 +4,7 @@ dependencies:
   googleapis: 36.0.0
   if-env: 1.0.4
 devDependencies:
+  dotenv: 6.2.0
   react: 16.3.2
   react-dom: 16.3.2
   react-scripts: 1.1.4
@@ -2489,6 +2490,12 @@ packages:
       node: '>=4.6.0'
     resolution:
       integrity: sha1-hk7xN5rO1Vzm+V3r7NzhefegzR0=
+  /dotenv/6.2.0:
+    dev: true
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
   /duplexer/0.1.1:
     resolution:
       integrity: sha1-rOb/gIwc5mtX0ev5eXessCM0z8E=
@@ -8840,6 +8847,7 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   '@material-ui/core': ^3.6.2
+  dotenv: ^6.2.0
   express: ^4.16.4
   googleapis: ^36.0.0
   if-env: ^1.0.4
