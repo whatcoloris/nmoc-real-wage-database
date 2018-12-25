@@ -48,7 +48,7 @@ jwt.authorize((err, response) => {
   
   google.drive('v3').files.list({
     pageSize: 10,
-    fields: 'nextPageToken, files(id, name, permissions)',
+    fields: 'nextPageToken, files(id, name, webViewLink)',
     auth: jwt,
   }, (err, res) => {
     if (err) return console.log('The gdrive API returned an error: ' + err);
@@ -56,33 +56,50 @@ jwt.authorize((err, response) => {
     if (files.length) {
       console.log('Files:');
       files.map((file) => {
-        console.log(`${file.name} (${file.id})`);
-        console.log(JSON.stringify(file))
+        console.log(`${file.name} (${file.id}) ${file.webViewLink}`);
+        // console.log(JSON.stringify(file))
       });
     } else {
       console.log('No gdrive files found.');
     }
   });
   
-  // google.drive('v3').files.create({
-  //   requestBody: {
-  //     title: 'Test',
-  //     mimeType: 'text/plain',
-  //     resource: fileMetadata
-  //   },
-  //   media: {
-  //     mimeType: 'text/plain',
-  //     body: 'Hello World!',
-  //   },
-  //   auth: jwt
-  // }, (err, result) => { 
-  //   if(err){
-  //     console.log('o noz! gdrive error!')
-  //     console.log(err)
-  //   }else{
-  //     console.log('gdrive  success!') 
-  //   }
-  // })
+  google.drive('v3').files.create({
+    requestBody: {
+      title: 'Test',
+      mimeType: 'text/plain',
+      resource: fileMetadata
+    },
+    media: {
+      mimeType: 'text/plain',
+      body: 'Hello World!',
+    },
+    auth: jwt
+  }, (err, result) => { 
+    if(err){
+      console.log('o noz! gdrive error!')
+      console.log(err)
+    }else{
+      console.log('gdrive  success! result:', result)
+      
+      
+      google.drive('v3').permissions.create({
+        resource: permission,
+        fileId: fileId,
+        fields: 'id',
+      }, function (err, res) {
+        if (err) {
+          // Handle error...
+          console.error(err);
+          permissionCallback(err);
+        } else {
+          console.log('Permission ID: ', res.id)
+          permissionCallback();
+        }
+      })
+      
+    }
+  })
   
   
 })
