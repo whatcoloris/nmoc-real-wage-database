@@ -7,6 +7,12 @@ import createStyles from "@material-ui/core/styles/createStyles";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Divider from '@material-ui/core/Divider';
 import TextField from "@material-ui/core/TextField";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import withRoot from "./withRoot";
 import FormField from "./FormField";
@@ -39,6 +45,12 @@ const styles = (theme) =>
     textField: {},
     label: {},
     help: {},
+    formControl: {
+      margin: theme.spacing.unit * 3,
+    },
+    group: {
+      margin: `${theme.spacing.unit}px 0`,
+    },
     divider: {
       margin: '2em 0',
       width: '100%'
@@ -104,15 +116,6 @@ const project_form = {
       label: "NAME(S) OF CREATOR(S) OR GROUP (PLEASE WRITE IN ALL CAPS)",
       help:
         "This will be the byline. If you would like the byline to include both the group name and the name of the primary collaborator(s) who constitute that group, please use a slash; e.g. “THE BEATLES / GEORGE HARRISON, JOHN LENNON, PAUL MCCARTNEY & RINGO STARR.” Please don't use this field for other collaborators and participants; there will be a field below for them.",
-      value: "",
-      required: true,
-      error: false,
-      validator: blankValidator
-    },{
-      id: "already_submitted",
-      label:
-        "Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?",
-      help: "",
       value: "",
       required: true,
       error: false,
@@ -218,7 +221,10 @@ const project_form = {
       error: false,
       validator: blankValidator
     }
-  ]
+  ],
+  already_submitted: undefined,
+  wants_to_get_involved: undefined,
+  wants_to_host: undefined
 };
 
 class App extends React.Component {
@@ -246,6 +252,8 @@ class App extends React.Component {
         return prevState;
       });
   };
+  
+  
 
   render() {
     const { classes } = this.props;
@@ -317,6 +325,36 @@ class App extends React.Component {
               <br/>
               <input type="file" />
             </FormField>
+            
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?</FormLabel>
+              <RadioGroup
+                aria-label="Already Submitted"
+                name="already_submitted"
+                className={classes.group}
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                <FormControlLabel value="no" control={<Radio />} label="No" />
+              </RadioGroup>
+            </FormControl>
+            
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">If you are interested in getting involved in the production of Emergency Index, please check the box below.</FormLabel>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={this.state.project_form.wants_to_get_involved} onChange={this.handleChange('wants_to_get_involved')} value={true} />
+                  }
+                  label="Yes"
+                />
+
+              </FormGroup>
+            </FormControl>
+            
+            
+wants_to_host
 
             <div className={classes.divider}>
               <Divider variant="middle" />
