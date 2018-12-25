@@ -48,7 +48,7 @@ jwt.authorize((err, response) => {
   
   google.drive('v3').files.list({
     pageSize: 10,
-    fields: 'nextPageToken, files(id, name)',
+    fields: 'nextPageToken, files(id, name, permissions)',
     auth: jwt,
   }, (err, res) => {
     if (err) return console.log('The gdrive API returned an error: ' + err);
@@ -57,6 +57,7 @@ jwt.authorize((err, response) => {
       console.log('Files:');
       files.map((file) => {
         console.log(`${file.name} (${file.id})`);
+        console.log(JSON.stringify(file))
       });
     } else {
       console.log('No gdrive files found.');
