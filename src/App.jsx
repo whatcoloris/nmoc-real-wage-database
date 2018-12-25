@@ -271,8 +271,8 @@ class App extends React.Component {
           You may want to prepare your *performance description* on a separate
           word document first and then cut-and-paste the final draft into the
           field below. If you have questions, please see our FAQ page, or email
-          us at emergencyindex2018@gmail.com. The deadline is{" "}
-          <b>January 6, 2019 at midnight PST</b>; this deadline is strict, and
+          us at emergencyindex2018@gmail.com. The deadline is 
+          <b> January 6, 2019 at midnight PST</b>; this deadline is strict, and
           we cannot consider submissions sent after this date. Please submit
           only one work; authors and collectives who submit more than one work
           will be disqualified. Please read all the instructions, and follow the
