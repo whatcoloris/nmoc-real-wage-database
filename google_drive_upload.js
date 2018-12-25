@@ -2,7 +2,7 @@
 
 const {google} = require('googleapis');
 const drive = google.drive('v3');
-const sampleClient = require('./sampleclient');
+const authClient = require('./gauth');
 
 async function runSamples() {
   // insertion example
