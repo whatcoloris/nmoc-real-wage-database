@@ -35,3 +35,6 @@ emergency-index-submission-2018
 
 google account to share sheet & drive folder with: emergencyindex@emergencyindex.iam.gserviceaccount.com 
 test sheet: 1hmEYFZlpf0GV1kG2lZophXwzUSKL20v6nDycJVElAcs
+
+use s3/digitalocean_spaces proto from https://glitch.com/edit/#!/multer-s3-test for image upload
+setup express .json endpoint to concat all submissions for google sheet json import
