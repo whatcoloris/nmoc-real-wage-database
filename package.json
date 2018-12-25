@@ -1,13 +1,14 @@
 {
   "name": "emergency-index-submission-2018",
-  "description" : "a form for submitting projects to the VOL. 8 EMERGENCY INDEX (2018)",
+  "description": "a form for submitting projects to the VOL. 8 EMERGENCY INDEX (2018)",
   "homepage": "https://emergency-index-submission-2018.glitch.me/",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
     "if-env": "^1.0.4",
     "express": "^4.16.4",
-    "@material-ui/core": "^3.6.2"
+    "@material-ui/core": "^3.6.2",
+    "googleapis": "^36.0.0"
   },
   "devDependencies": {
     "react": "^16.3.2",
