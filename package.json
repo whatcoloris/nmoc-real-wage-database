@@ -20,5 +20,11 @@
     "prod:start": "npm server.js",
     "build": "react-scripts build && gzip -rk build && refresh"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": "10.x"
+  },
+  "repository": {
+    "url": "https://api.glitch.com/emergency-index-submission-2018/git"
+  }
 }

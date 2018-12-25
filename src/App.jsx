@@ -112,7 +112,6 @@ const project_form = {
       help:
         "This will appear as a sub-byline. Please only list key collaborators; do not include sponsoring and producing institutions, curators, festivals, audience participants, etc. (if absolutely necessary, these specifics can be included at the end of your performance description). Because space is limited, please do NOT include the roles of the key collaborators; e.g., (composer) Bjork. If such information is necessary please include it in your description.",
       value: "",
-      items: [],
       required: true,
       error: false,
       validator: blankValidator
@@ -121,7 +120,7 @@ const project_form = {
       id: "date_first_performed",
       label: "Date of First Performance",
       help:
-        "If the performance was durational, indicate the start date here, and specify the duration in the field below. ***IF THE FIRST PERFORMANCE OF YOUR WORK PRECEDED JANUARY 1, 2017, IT CANNOT BE ACCEPTED.***",
+        "If the performance was durational, indicate the start date here, and specify the duration in the field below. ***IF THE FIRST PERFORMANCE OF YOUR WORK PRECEDED JANUARY 1, 2018, IT CANNOT BE ACCEPTED.***",
       value: "",
       required: true,
       error: false,
@@ -181,7 +180,7 @@ const project_form = {
       id: "published_contact",
       label: "Creator(s)/Group contact email (to be published; optional)",
       help:
-        "If you must use more than one email address, separate them with a slash; e.g., emergency@uglyducklingpresse.org / emergencyindex2017@gmail.com. Please do not include more than two addresses.",
+        "If you must use more than one email address, separate them with a slash; e.g., emergency@uglyducklingpresse.org / emergencyindex2018@gmail.com. Please do not include more than two addresses.",
       value: "",
       required: false,
       error: false,
@@ -193,7 +192,6 @@ const project_form = {
       help:
         "Please do not use more than two websites. If two, separate with a slash; e.g., www.emergencyindex.com / www.uglyducklingpresse.org",
       value: "",
-      items: [],
       required: false,
       error: false,
       validator: blankValidator
