@@ -79,7 +79,7 @@ const project_form = {
   items: [
     {
       id: "contact_name",
-      label: "Name",
+      label: "CONTACT NAME",
       help: "This will not be published.",
       value: "",
       required: true,
@@ -87,7 +87,7 @@ const project_form = {
       validator: blankValidator
     },{
       id: "contact_email",
-      label: "Contact Email",
+      label: "CONTACT EMAIL",
       help:
         "Email address of person submitting this form. This will not be published, but we will use it to contact you. Please enter an email that you check regularly. If you make a typo here, we will not be able to contact you, ever.",
       value: "",
@@ -96,7 +96,7 @@ const project_form = {
       validator: blankValidator
     },{
       id: "contact_postal",
-      label: "POSTAL ADDRESS OF CONTACT",
+      label: "CONTACT POSTAL ADDRESS",
       help: "This will not be published. A postal address is required.",
       value: "",
       required: true,
@@ -133,7 +133,7 @@ const project_form = {
       help:
         "This will appear as a sub-byline. Please only list key collaborators; do not include sponsoring and producing institutions, curators, festivals, audience participants, etc. (if absolutely necessary, these specifics can be included at the end of your performance description). Because space is limited, please do NOT include the roles of the key collaborators; e.g., (composer) Bjork. If such information is necessary please include it in your description.",
       value: "",
-      required: true,
+      required: false,
       error: false,
       validator: blankValidator
     },{
@@ -149,7 +149,7 @@ const project_form = {
       id: "times_performed",
       label: "How many times was it performed in 2018?",
       help:
-        'If your piece was performed more than 6 times, or was durational and ongoing, please choose "other" and specify below.',
+        'Please type a number.',
       value: "",
       required: true,
       error: false,
