@@ -245,6 +245,7 @@ class App extends React.Component {
       photoUrl: undefined,
       photoName: undefined,
       submitError: undefined,
+      validationError: undefined,
       submitSuccess: undefined
     };
     this.handleChange = this.handleChange.bind(this);
@@ -252,6 +253,7 @@ class App extends React.Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePhotoChange = this.handlePhotoChange.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   handleChange(event, idx) {
@@ -301,7 +303,7 @@ class App extends React.Component {
     });
     const error_items = items.filter( i => i.error );
     if(error_items.length > 0){
-      this.setState({project_form: { items }, submitError: 'Oops, please type a response for '+error_items.length+' missing required field(s)!', submitSuccess: false});
+      this.setState({project_form: { items }, validationError: 'Oops, please type a response for '+error_items.length+' missing required field(s)!', submitError: undefined, submitSuccess: false});
     }else{
       this.submit();
     }
@@ -365,114 +367,116 @@ class App extends React.Component {
           <Typography variant="h4" component="h4" className={classes.beta}>
             NOTE: this is just a test form! <br />don't submit actual performance. 
           </Typography>
-          <Typography component="p" className={classes.info}>
-            Emergency INDEX allows you to report and document novel strategies,
-            innovations and ideas in a performance-based work you made in 2018. To
-            submit a performance for INDEX Vol. 8, please fill out the form below.
-            Once you complete this form, you will also need to email an image to
-            accompany your submission; details on this are below.
-          </Typography>
-          <Typography className={classes.info} component="p">
-            Guidelines are adjacent to each prompt; please read them carefully.
-            You may want to prepare your *performance description* on a separate
-            word document first and then cut-and-paste the final draft into the
-            field below. If you have questions, please see our FAQ page, or email
-            us at emergencyindex2018@gmail.com. The deadline is 
-            <b> January 6, 2019 at midnight PST</b>; this deadline is strict, and
-            we cannot consider submissions sent after this date. Please submit
-            only one work; authors and collectives who submit more than one work
-            will be disqualified. Please read all the instructions, and follow the
-            guidelines carefully.
-          </Typography>
-          <Typography className={classes.required} component="p">
-            * Required
-          </Typography>
-          <form className={classes.container} noValidate autoComplete="off">
-            {project_form.items.map((field, idx) => (
-              <FormField
-                label={field.label}
-                help={field.help}
-                required={field.required}
-                key={idx}>
-                <TextField
-                  value={field.value}
-                  id={field.id}
-                  type={field.id.match(/date/) ? "date" : "text"}
-                  className={classes.textField}
-                  onChange={(event) => this.handleChange(event, idx)}
-                  placeholder="Your Answer"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  margin="normal"
+          {!this.state.submitSuccess && <React.Fragmet>
+            <Typography component="p" className={classes.info}>
+              Emergency INDEX allows you to report and document novel strategies,
+              innovations and ideas in a performance-based work you made in 2018. To
+              submit a performance for INDEX Vol. 8, please fill out the form below.
+              Once you complete this form, you will also need to email an image to
+              accompany your submission; details on this are below.
+            </Typography>
+            <Typography className={classes.info} component="p">
+              Guidelines are adjacent to each prompt; please read them carefully.
+              You may want to prepare your *performance description* on a separate
+              word document first and then cut-and-paste the final draft into the
+              field below. If you have questions, please see our FAQ page, or email
+              us at emergencyindex2018@gmail.com. The deadline is 
+              <b> January 6, 2019 at midnight PST</b>; this deadline is strict, and
+              we cannot consider submissions sent after this date. Please submit
+              only one work; authors and collectives who submit more than one work
+              will be disqualified. Please read all the instructions, and follow the
+              guidelines carefully.
+            </Typography>
+            <Typography className={classes.required} component="p">
+              * Required
+            </Typography>
+            <form className={classes.container} noValidate autoComplete="off">
+              {project_form.items.map((field, idx) => (
+                <FormField
+                  label={field.label}
+                  help={field.help}
                   required={field.required}
-                  rowsMax={field.id === "description" ? 32 : 1}
-                  multiline={field.id === "description"}
-                  helperText={field.helperText}
-                  error={field.error}
-                  fullWidth />
+                  key={idx}>
+                  <TextField
+                    value={field.value}
+                    id={field.id}
+                    type={field.id.match(/date/) ? "date" : "text"}
+                    className={classes.textField}
+                    onChange={(event) => this.handleChange(event, idx)}
+                    placeholder="Your Answer"
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    margin="normal"
+                    required={field.required}
+                    rowsMax={field.id === "description" ? 32 : 1}
+                    multiline={field.id === "description"}
+                    helperText={field.helperText}
+                    error={field.error}
+                    fullWidth />
+                </FormField>
+              ))}
+
+              <FormField
+                label="Image"
+                help="Image file needs to be 5x7 inches (1500x2100 pixels) or 7x5 inches (2100x1500 pixels), greyscale (b&w), @ 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file."
+                required>
+                <br/>
+                <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />
+                {this.state.isUploadingPhoto && <LinearProgress />}
+                {this.state.photoError && <div className={classes.error}>{this.state.photoError}</div>}
+                {this.state.photoName && <b>{this.state.photoName}</b>}
               </FormField>
-            ))}
 
-            <FormField
-              label="Image"
-              help="Image file needs to be 5x7 inches (1500x2100 pixels) or 7x5 inches (2100x1500 pixels), greyscale (b&w), @ 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file."
-              required>
-              <br/>
-              <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />
-              {this.state.isUploadingPhoto && <LinearProgress />}
-              {this.state.photoError && <div className={classes.error}>{this.state.photoError}</div>}
-              {this.state.photoName && <b>{this.state.photoName}</b>}
-            </FormField>
+              <FormField
+                label="Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?"
+                help=""
+                required>
+                <RadioGroup
+                  aria-label="Already Submitted"
+                  name="already_submitted"
+                  className={classes.group}
+                  onChange={(event) => this.handleRadio(event, 'already_submitted')}>
+                  <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormField>
 
-            <FormField
-              label="Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?"
-              help=""
-              required>
-              <RadioGroup
-                aria-label="Already Submitted"
-                name="already_submitted"
-                className={classes.group}
-                onChange={(event) => this.handleRadio(event, 'already_submitted')}>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-              </RadioGroup>
-            </FormField>
+              <FormField
+                label="If you are interested in getting involved in the production of Emergency Index, please check the box below."
+                help="">
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox onChange={(event) => this.handleCheckbox(event, 'wants_to_get_involved')} value="yes" />
+                    }
+                    label="Yes" />
+                </FormGroup>
+              </FormField>
 
-            <FormField
-              label="If you are interested in getting involved in the production of Emergency Index, please check the box below."
-              help="">
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox onChange={(event) => this.handleCheckbox(event, 'wants_to_get_involved')} value="yes" />
-                  }
-                  label="Yes" />
-              </FormGroup>
-            </FormField>
-            
-   
-            <FormField
-              label="If you are interested in hosting an Emergency Index-related event, check the box below."
-              help="">
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox onChange={(event) => this.handleCheckbox(event, 'wants_to_host')} value="yes" />
-                  }
-                  label="Yes" />
-              </FormGroup>
-            </FormField>
 
-            <div className={classes.divider}>
-              <Divider variant="middle" />
-            </div>
+              <FormField
+                label="If you are interested in hosting an Emergency Index-related event, check the box below."
+                help="">
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox onChange={(event) => this.handleCheckbox(event, 'wants_to_host')} value="yes" />
+                    }
+                    label="Yes" />
+                </FormGroup>
+              </FormField>
 
-            <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" fullWidth>Submit</Button>
-            {this.state.submitError && <div className={classes.error}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</div>}
-            {this.state.submitSuccess && <div>{this.state.submitSuccess}<span role="img" aria-label="smile cat">😸</span></div>}
-            
-          </form>
+              <div className={classes.divider}>
+                <Divider variant="middle" />
+              </div>
+
+              <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" fullWidth>Submit</Button>
+              {this.state.submitError && <p className={classes.error}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</p>}
+              {this.state.validationError && <div><p>{this.state.validationError}</p><p>If you want to submit your entry as-is <a href="#" onClick={this.submit}>click here.</a> NOTE: incomplete submissions will likely not get read!</p></div>}
+            </form>
+          </React.Fragmet>}
+          {this.state.submitSuccess && <Typography variant="h5" component="h5" className={classes.headline}>{this.state.submitSuccess}<span role="img" aria-label="smile cat">😸</span></Typography>}
         </Paper>
         <footer className={classes.footer}>
           <a 
