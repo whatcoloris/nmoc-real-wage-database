@@ -240,7 +240,9 @@ class App extends React.Component {
     this.state = {
       project_form: project_form,
       photoError: undefined,
-      isUploadingPhoto: false
+      isUploadingPhoto: false,
+      photoUrl: undefined,
+      photoName: undefined
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
@@ -302,7 +304,7 @@ class App extends React.Component {
   }
   
   handlePhotoChange(event) {
-    this.setState({isUploadingPhoto: true});
+    this.setState({isUploadingPhoto: true, photoName: event.target.files[0].name});
     
     const data = new FormData();
     data.append('photo', event.target.files[0]);
@@ -313,9 +315,9 @@ class App extends React.Component {
     }).then(
       response => response.json()
     ).then(
-      success => {
-        console.log(success)
-        this.setState({isUploadingPhoto: false, photoError: undefined});
+      resp => {
+        console.log(resp)
+        this.setState({isUploadingPhoto: false, photoError: resp.error, photoUrl: resp.data});
       }
     ).catch(
       error => {
@@ -394,9 +396,10 @@ class App extends React.Component {
               help="The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file"
               required>
               <br/>
-              <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto} />
+              <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />
               {this.state.isUploadingPhoto && <LinearProgress />}
               {this.state.photoError && <div className={classes.photoError}>{this.state.photoError}</div>}
+              {this.state.photoName && <b>{this.state.photoName}</b>}
             </FormField>
 
             <FormField
