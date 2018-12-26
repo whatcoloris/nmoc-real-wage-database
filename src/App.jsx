@@ -319,6 +319,8 @@ class App extends React.Component {
   
   submit() {
     console.log('gonna submit:',this.state);
+    
+    
     fetch('/submit', {
       method: 'POST',
       headers: {
