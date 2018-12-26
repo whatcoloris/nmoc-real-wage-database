@@ -234,12 +234,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      project_form: project_form
+      project_form: project_form,
+      photoError: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePhotoChange = this.handlePhotoChange.bind(this);
   }
 
   handleChange(event, idx) {
@@ -292,6 +294,25 @@ class App extends React.Component {
       console.log('hooray, no errorz!'); 
     }
     
+  }
+  
+  handlePhotoChange(event) {
+    console.log('this.handlePhotoChange event.target.files:',event.target.files, ' event.target.value:',event.target.value);
+    
+    const data = new FormData();
+    data.append('file', event.target.files[0]);
+
+    fetch('/photo', {
+      method: 'POST',
+      body: data
+    }).then(
+      response => response.json()
+    ).then(
+      success => console.log(success)
+    ).catch(
+      error => console.warn(error)
+    );
+    event.target.value = '';
   }
 
   render() {
@@ -362,8 +383,8 @@ class App extends React.Component {
               help="The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file"
               required>
               <br/>
-              <<input type="file" name="photo" accept=".tif,.tiff, image/tiff" />
-              {this.state.photoError && <div></div>
+              <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} />
+              {this.state.photoError && <div>{this.state.photoError}</div>}
             </FormField>
 
             <FormField
