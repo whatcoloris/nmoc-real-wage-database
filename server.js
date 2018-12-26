@@ -49,7 +49,7 @@ app.post('/photo', upload.single('photo'), function(req, res, next) {
     const d = sizeOf(req.file.path)
     const isInvalidSize = (d.width != 1500 && d.width != 2100) || (d.height != 1500 && d.height != 2100);
     if(isInvalidSize) {
-      res.json({success: false, error: "Image needs to be 5x7 inches (or 1500x2100 pixels)."});
+      res.json({success: false, error: "Image needs to be 5x7 (1500x2100 pixels) or 7x5 inches (2100x1500 pixels). Your photo is "+d.width+"x"+d.height});
     } else {
       s3.upload({
         Bucket: 'emergencyindex',
