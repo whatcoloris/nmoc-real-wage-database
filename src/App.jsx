@@ -12,6 +12,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import withRoot from "./withRoot";
 import FormField from "./FormField";
@@ -235,7 +236,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       project_form: project_form,
-      photoError: false
+      photoError: false,
+      isUploadingPhoto: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
@@ -297,20 +299,27 @@ class App extends React.Component {
   }
   
   handlePhotoChange(event) {
+    this.setState({isUploadingPhoto: true});
     console.log('this.handlePhotoChange event.target.files:',event.target.files, ' event.target.value:',event.target.value);
     
     const data = new FormData();
-    data.append('file', event.target.files[0]);
+    data.append('photo', event.target.files[0]);
 
-    fetch('/photo', {
+    fetch('https://multer-s3-test.glitch.me/test', {
       method: 'POST',
       body: data
     }).then(
       response => response.json()
     ).then(
-      success => console.log(success)
+      success => {
+        console.log(success)
+        this.setState({isUploadingPhoto: false});
+      }
     ).catch(
-      error => console.warn(error)
+      error => {
+        console.warn(error)
+        this.setState({isUploadingPhoto: false});
+      }
     );
     event.target.value = '';
   }
@@ -383,7 +392,8 @@ class App extends React.Component {
               help="The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file"
               required>
               <br/>
-              <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} />
+              <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto} />
+              {this.state.isUploadingPhoto && <LinearProgress />}
               {this.state.photoError && <div>{this.state.photoError}</div>}
             </FormField>
 
