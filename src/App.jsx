@@ -320,6 +320,14 @@ class App extends React.Component {
   submit() {
     console.log('gonna submit:',this.state);
     
+    const postData = { data: [ 
+      ...this.state.project_form.items.map( i => i.value ), 
+      this.state.photoUrl, 
+      this.state.project_form.already_submitted, 
+      this.state.project_form.wants_to_get_involved, 
+      this.state.project_form.wants_to_host,  
+      this.state.validationError 
+    ] }
     
     fetch('/submit', {
       method: 'POST',
