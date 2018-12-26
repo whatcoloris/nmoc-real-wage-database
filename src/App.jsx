@@ -287,7 +287,7 @@ class App extends React.Component {
       item.helperText = item.error ? 'Required' : '';
     });
     if(items.filter( i => i.error ).length > 0){
-      this.setState({project_form: { items }}, () => console.log('state after validation:',this.state));
+      this.setState({project_form: { items }});
     }else{
       console.log('hooray, no errorz!'); 
     }
