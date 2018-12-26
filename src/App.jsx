@@ -392,8 +392,8 @@ class App extends React.Component {
             ))}
 
             <FormField
-              label="Photo"
-              help="Image needs to be 5x7 inches (1500x2100 pixels) or 7x5 inches (2100x1500 pixels), greyscale (b&w), @ 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file."
+              label="Image"
+              help="Image file needs to be 5x7 inches (1500x2100 pixels) or 7x5 inches (2100x1500 pixels), greyscale (b&w), @ 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file."
               required>
               <br/>
               <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />

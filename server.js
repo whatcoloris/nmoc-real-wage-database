@@ -19,7 +19,8 @@ const upload = multer({
       cb(null, '/tmp')
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() +'_'+ file.originalname)
+      
+      cb(null, Date.now() +'_'+ file.originalname.replace(/[^A-Za-z0-9\.]/g,''))
     }
   }),
   fileFilter: function (req, file, cb) {
