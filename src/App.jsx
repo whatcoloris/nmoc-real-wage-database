@@ -231,7 +231,8 @@ const project_form = {
   ],
   already_submitted: undefined,
   wants_to_get_involved: undefined,
-  wants_to_host: undefined
+  wants_to_host: undefined,
+  inProgress: undefined
 };
 
 class App extends React.Component {
@@ -267,6 +268,7 @@ class App extends React.Component {
             item.helperText = `${item.error ? current_length > 1 ? 'Too long!' : 'Required' : ''} ${current_length} / 400`
           }
         }
+        prevState.inProgress = true;
         return prevState;
       });
   };
@@ -301,7 +303,6 @@ class App extends React.Component {
     if(error_items.length > 0){
       this.setState({project_form: { items }, submitError: 'Oops, please type a response for '+error_items.length+' missing required field(s)!', submitSuccess: false});
     }else{
-      console.log('hooray, no errorz!'); 
       this.submit();
     }
   }
