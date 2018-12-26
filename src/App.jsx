@@ -63,6 +63,9 @@ const styles = (theme) =>
       color: 'black',
       textDecoration: 'none',
       fontSize: '0.75em'
+    },
+    photoError: {
+      color: 'red',
     }
   });
 
@@ -236,7 +239,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       project_form: project_form,
-      photoError: false,
+      photoError: undefined,
       isUploadingPhoto: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -300,12 +303,11 @@ class App extends React.Component {
   
   handlePhotoChange(event) {
     this.setState({isUploadingPhoto: true});
-    console.log('this.handlePhotoChange event.target.files:',event.target.files, ' event.target.value:',event.target.value);
     
     const data = new FormData();
     data.append('photo', event.target.files[0]);
 
-    fetch('https://multer-s3-test.glitch.me/test', {
+    fetch('/photo', {
       method: 'POST',
       body: data
     }).then(
@@ -313,12 +315,12 @@ class App extends React.Component {
     ).then(
       success => {
         console.log(success)
-        this.setState({isUploadingPhoto: false});
+        this.setState({isUploadingPhoto: false, photoError: undefined});
       }
     ).catch(
       error => {
         console.warn(error)
-        this.setState({isUploadingPhoto: false});
+        this.setState({isUploadingPhoto: false, photoError: error});
       }
     );
     event.target.value = '';
@@ -394,7 +396,7 @@ class App extends React.Component {
               <br/>
               <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto} />
               {this.state.isUploadingPhoto && <LinearProgress />}
-              {this.state.photoError && <div>{this.state.photoError}</div>}
+              {this.state.photoError && <div className={classes.photoError}>{this.state.photoError}</div>}
             </FormField>
 
             <FormField
