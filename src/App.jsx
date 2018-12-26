@@ -318,13 +318,14 @@ class App extends React.Component {
   }
   
   submit() {
+    console.log('gonna submit:',this.state);
     fetch('/submit', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.state)
+      body: this.state
     }).then(
       response => response.json()
     ).then(
