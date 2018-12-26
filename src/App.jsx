@@ -318,16 +318,19 @@ class App extends React.Component {
   }
   
   submit() {
-    console.log('gonna submit:',this.state);
-    
-    const postData = { data: [ 
-      ...this.state.project_form.items.map( i => i.value ), 
-      this.state.photoUrl, 
-      this.state.project_form.already_submitted, 
-      this.state.project_form.wants_to_get_involved, 
-      this.state.project_form.wants_to_host,  
-      this.state.validationError 
-    ] }
+    console.log('submit, state is:',this.state);
+    const postData = { 
+      data: [ 
+        ...this.state.project_form.items.map( i => i.value ), 
+        this.state.photoUrl, 
+        this.state.project_form.already_submitted, 
+        this.state.project_form.wants_to_get_involved, 
+        this.state.project_form.wants_to_host,  
+        this.state.validationError 
+      ], 
+      state: this.state
+    }
+    console.log('gonna submit:',postData);
     
     fetch('/submit', {
       method: 'POST',
@@ -335,19 +338,13 @@ class App extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(postData)
     }).then(
       response => response.json()
     ).then(
-      resp => {
-        console.log(resp)
-        this.setState({submitError: resp.error, submitSuccess: resp.data });
-      }
+      resp => this.setState({submitError: resp.error, submitSuccess: resp.data })
     ).catch(
-      error => {
-        console.warn(error)
-        this.setState({submitError: true, submitSuccess: undefined});
-      }
+      error => this.setState({submitError: true, submitSuccess: undefined})
     ); 
   }
   
