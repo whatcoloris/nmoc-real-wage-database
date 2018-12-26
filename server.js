@@ -8,7 +8,10 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 
 const app = express();
-app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 const spacesEndpoint = new aws.Endpoint('sfo2.digitaloceanspaces.com');
 const s3 = new aws.S3({

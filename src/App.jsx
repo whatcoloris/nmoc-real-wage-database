@@ -325,7 +325,7 @@ class App extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: this.state
+      body: JSON.stringify(this.state)
     }).then(
       response => response.json()
     ).then(
