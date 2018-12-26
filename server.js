@@ -3,6 +3,8 @@ const express = require('express');
 const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+const path = require('path');
+const sizeOf = require('image-size');
 
 const app = express();
 
@@ -20,7 +22,19 @@ const upload = multer({
     key: function (req, file, cb) {
       cb(null, Date.now().toString())
     }
-  })
+  }),
+  fileFilter: function (req, file, cb) {
+    const filetypes = /jpeg|jpg|png|tif|tiff/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const d = sizeOf(file);
+    console.log(d.width, d.height);
+    const isInvalidSize = (d.width != 1500 && d.width != 2100) || (d.height != 1500 && d.height != 2100)
+    if (mimetype && extname && !isInvalidSize) {
+      return cb(null, true);
+    }
+    cb(isInvalidSize ? "Image needs to be 5x7 inches (or 1500x2100 pixels)." : "Error: Photo upload only supports the following filetypes: " + filetypes);
+  }
 });
 
 // http://expressjs.com/en/starter/static-files.html
