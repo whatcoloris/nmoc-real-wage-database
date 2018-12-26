@@ -55,6 +55,10 @@ const styles = (theme) =>
       margin: '2em 0',
       width: '100%'
     },
+    thankyou: {
+      textAlign: 'center',
+      margin: theme.spacing.unit * 2
+    },
     footer: {
       textAlign: 'right',
       margin: '1em 1em 0'
@@ -316,7 +320,11 @@ class App extends React.Component {
   submit() {
     fetch('/submit', {
       method: 'POST',
-      body: this.state
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
     }).then(
       response => response.json()
     ).then(
@@ -480,7 +488,7 @@ class App extends React.Component {
               {this.state.validationError && <div><p>{this.state.validationError}</p><p>If you want to submit your entry as-is <a href="#" onClick={this.submit}>click here.</a> NOTE: incomplete submissions will likely not get read!</p></div>}
             </form>
           </React.Fragment>}
-          {this.state.submitSuccess && <Typography variant="h5" component="h5" className={classes.headline}>{this.state.submitSuccess}<span role="img" aria-label="smile cat">😸</span></Typography>}
+          {this.state.submitSuccess && <Typography variant="h5" component="h5" className={classes.thankyou}>{this.state.submitSuccess}<span role="img" aria-label="smile cat">😸</span></Typography>}
         </Paper>
         <footer className={classes.footer}>
           <a 

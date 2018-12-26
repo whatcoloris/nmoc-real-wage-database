@@ -1,6 +1,7 @@
 dependencies:
   '@material-ui/core': 3.7.1
   aws-sdk: 2.382.0
+  body-parser: 1.18.3
   express: 4.16.4
   googleapis: 36.0.0
   if-env: 1.0.4
@@ -8944,6 +8945,7 @@ shrinkwrapVersion: 3
 specifiers:
   '@material-ui/core': ^3.6.2
   aws-sdk: ^2.382.0
+  body-parser: ^1.18.3
   dotenv: ^6.2.0
   express: ^4.16.4
   googleapis: ^36.0.0
