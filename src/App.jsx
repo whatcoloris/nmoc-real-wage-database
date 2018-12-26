@@ -239,6 +239,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event, idx) {
@@ -277,6 +278,20 @@ class App extends React.Component {
         return prevState;
       }, () => console.log('state now', this.state)
     );
+  }
+  
+  handleSubmit() {
+    const items = this.state.project_form.items
+    items.forEach( (item) => {
+      item.error = item.validator(item.value);
+      item.helperText = item.error ? 'Required' : '';
+    });
+    if(items.filter( i => i.error ).length > 0){
+      this.setState({project_form: { items }}, () => console.log('state after validation:',this.state));
+    }else{
+      console.log('hooray, no errorz!'); 
+    }
+    
   }
 
   render() {
@@ -393,7 +408,7 @@ class App extends React.Component {
               <Divider variant="middle" />
             </div>
 
-            <Button variant="contained" color="primary" size="large" fullWidth>Submit</Button>
+            <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" fullWidth>Submit</Button>
           </form>
         </Paper>
         <footer className={classes.footer}>
