@@ -297,10 +297,12 @@ class App extends React.Component {
       item.error = item.validator(item.value);
       item.helperText = item.error ? 'Required' : '';
     });
-    if(items.filter( i => i.error ).length > 0){
-      this.setState({project_form: { items }});
+    const error_items = items.filter( i => i.error );
+    if(error_items.length > 0){
+      this.setState({project_form: { items }, submitError: 'Oops, please type a response for '+error_items.length+' missing required field(s)!', submitSuccess: false});
     }else{
       console.log('hooray, no errorz!'); 
+      this.submit();
     }
   }
   
@@ -466,7 +468,7 @@ class App extends React.Component {
             </div>
 
             <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" fullWidth>Submit</Button>
-            {this.stae.submitError && <div className={classes.error}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</div>}
+            {this.state.submitError && <div className={classes.error}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</div>}
             {this.state.submitSuccess && <div>{this.state.submitSuccess}<span role="img" aria-label="smile cat">😸</span></div>}
             
           </form>
