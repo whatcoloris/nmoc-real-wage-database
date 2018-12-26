@@ -263,8 +263,10 @@ class App extends React.Component {
         const item = prevState.project_form.items[idx]
         if (item) {
           item.value = event.target.value;
-          item.error = item.validator(event.target.value)
-          item.helperText = item.error ? 'Required' : ''
+          if(item.required){ 
+            item.error = item.validator(event.target.value)
+            item.helperText = item.error ? 'Required' : ''
+          }
           if(item.id === 'description'){
             const current_length = event.target.value.trim().split(/\s+/).length;
             item.helperText = `${item.error ? current_length > 1 ? 'Too long!' : 'Required' : ''} ${current_length} / 400`
@@ -281,7 +283,7 @@ class App extends React.Component {
       (prevState) => {
         prevState.project_form[key] = event.target.value;
         return prevState;
-      }, () => console.log('state now', this.state)
+      }
     );
   }
   
@@ -291,15 +293,17 @@ class App extends React.Component {
       (prevState) => {
         prevState.project_form[key] = event.target.checked;
         return prevState;
-      }, () => console.log('state now', this.state)
+      }
     );
   }
   
   handleSubmit() {
     const items = this.state.project_form.items
     items.forEach( (item) => {
-      item.error = item.validator(item.value);
-      item.helperText = item.error ? 'Required' : '';
+      if(item.required){ 
+        item.error = item.validator(item.value);
+        item.helperText = item.error ? 'Required' : '';
+      }
     });
     const error_items = items.filter( i => i.error );
     if(error_items.length > 0){
@@ -310,7 +314,7 @@ class App extends React.Component {
   }
   
   submit() {
-    fetch('/photo', {
+    fetch('/submit', {
       method: 'POST',
       body: this.state
     }).then(
@@ -367,7 +371,7 @@ class App extends React.Component {
           <Typography variant="h4" component="h4" className={classes.beta}>
             NOTE: this is just a test form! <br />don't submit actual performance. 
           </Typography>
-          {!this.state.submitSuccess && <React.Fragmet>
+          {!this.state.submitSuccess && <React.Fragment>
             <Typography component="p" className={classes.info}>
               Emergency INDEX allows you to report and document novel strategies,
               innovations and ideas in a performance-based work you made in 2018. To
@@ -475,7 +479,7 @@ class App extends React.Component {
               {this.state.submitError && <p className={classes.error}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</p>}
               {this.state.validationError && <div><p>{this.state.validationError}</p><p>If you want to submit your entry as-is <a href="#" onClick={this.submit}>click here.</a> NOTE: incomplete submissions will likely not get read!</p></div>}
             </form>
-          </React.Fragmet>}
+          </React.Fragment>}
           {this.state.submitSuccess && <Typography variant="h5" component="h5" className={classes.headline}>{this.state.submitSuccess}<span role="img" aria-label="smile cat">😸</span></Typography>}
         </Paper>
         <footer className={classes.footer}>
