@@ -362,7 +362,8 @@ class App extends React.Component {
               help="The image will need to be 5x7 inches, greyscale (b&w), 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file"
               required>
               <br/>
-              <input type="file" />
+              <<input type="file" name="photo" accept=".tif,.tiff, image/tiff" />
+              {this.state.photoError && <div></div>
             </FormField>
 
             <FormField

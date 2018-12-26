@@ -2,9 +2,9 @@
 const express = require('express');
 const aws = require('aws-sdk');
 const multer = require('multer');
-const multerS3 = require('multer-s3');
 const path = require('path');
 const sizeOf = require('image-size');
+const fs = require('fs');
 
 const app = express();
 
@@ -14,26 +14,23 @@ const s3 = new aws.S3({
 });
 
 const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'emergencyindex',
-    acl: 'public-read',
-    contentType: multerS3.AUTO_CONTENT_TYPE,
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString())
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '/tmp')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() +'_'+ file.originalname)
     }
   }),
   fileFilter: function (req, file, cb) {
-    const filetypes = /jpeg|jpg|png|tif|tiff/;
+    const filetypes = /tif|tiff/;
     const mimetype = filetypes.test(file.mimetype);
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    const d = sizeOf(file);
-    console.log(d.width, d.height);
-    const isInvalidSize = (d.width != 1500 && d.width != 2100) || (d.height != 1500 && d.height != 2100)
-    if (mimetype && extname && !isInvalidSize) {
-      return cb(null, true);
+    if (!mimetype || !extname) {
+      req.fileValidationError = "Error: Photo upload only supports .tif or .tiff files!";
+      return cb(null, false, new Error(req.fileValidationError));
     }
-    cb(isInvalidSize ? "Image needs to be 5x7 inches (or 1500x2100 pixels)." : "Error: Photo upload only supports the following filetypes: " + filetypes);
+    return cb(null, true);
   }
 });
 
@@ -46,6 +43,31 @@ app.get("/", function(request, response) {
 });
 
 app.post('/photo', upload.single('photo'), function(req, res, next) {
+  if(req.fileValidationError) {
+    res.json({success: false, error: req.fileValidationError});
+  } else {
+    const d = sizeOf(req.file.path)
+    const isInvalidSize = (d.width != 1500 && d.width != 2100) || (d.height != 1500 && d.height != 2100);
+    if(isInvalidSize) {
+      res.json({success: false, error: "Image needs to be 5x7 inches (or 1500x2100 pixels)."});
+    } else {
+      s3.upload({
+        Bucket: 'emergencyindex',
+        ACL: 'public-read',
+        ContentType: req.file.mimetype,
+        Key: `uploads/${req.file.filename}`,
+        Body: fs.createReadStream(req.file.path)
+      },function (err, data) {
+      if (err) {
+        res.json({success: false, error: "Error: " + err});
+      } if (data) {
+        fs.unlinkSync(req.file.path);
+        res.json({success: true, data: data.Location});
+      }})
+    }
+  }
+  
+
   // const now = Date.now().toString()
   // s3.upload({
   //   Bucket: 'emergencyindex',
@@ -57,9 +79,9 @@ app.post('/photo', upload.single('photo'), function(req, res, next) {
   // if (err) {
   //   res.send("Error" + err);
   // } if (data) {
-  //   res.send(data.Location);
+  //   res.send("Upload Success " + data.Location);
   // }})
-  res.send('ok')
+  
 });
 
 // listen for requests :D
