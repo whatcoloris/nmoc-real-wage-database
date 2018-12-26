@@ -64,7 +64,7 @@ const styles = (theme) =>
       textDecoration: 'none',
       fontSize: '0.75em'
     },
-    photoError: {
+    error: {
       color: 'red',
     }
   });
@@ -242,7 +242,9 @@ class App extends React.Component {
       photoError: undefined,
       isUploadingPhoto: false,
       photoUrl: undefined,
-      photoName: undefined
+      photoName: undefined,
+      submitError: undefined,
+      submitSuccess: undefined
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
@@ -300,7 +302,25 @@ class App extends React.Component {
     }else{
       console.log('hooray, no errorz!'); 
     }
-    
+  }
+  
+  submit() {
+    fetch('/photo', {
+      method: 'POST',
+      body: this.state
+    }).then(
+      response => response.json()
+    ).then(
+      resp => {
+        console.log(resp)
+        this.setState({submitError: resp.error, submitSuccess: resp.data });
+      }
+    ).catch(
+      error => {
+        console.warn(error)
+        this.setState({submitError: true, submitSuccess: undefined});
+      }
+    ); 
   }
   
   handlePhotoChange(event) {
@@ -398,7 +418,7 @@ class App extends React.Component {
               <br/>
               <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />
               {this.state.isUploadingPhoto && <LinearProgress />}
-              {this.state.photoError && <div className={classes.photoError}>{this.state.photoError}</div>}
+              {this.state.photoError && <div className={classes.error}>{this.state.photoError}</div>}
               {this.state.photoName && <b>{this.state.photoName}</b>}
             </FormField>
 
@@ -446,6 +466,9 @@ class App extends React.Component {
             </div>
 
             <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" fullWidth>Submit</Button>
+            {this.stae.submitError && <div className={classes.error}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</div>}
+            {this.state.submitSuccess && <div>{this.state.submitSuccess}<span role="img" aria-label="smile cat">😸</span></div>}
+            
           </form>
         </Paper>
         <footer className={classes.footer}>

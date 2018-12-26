@@ -19,7 +19,6 @@ const upload = multer({
       cb(null, '/tmp')
     },
     filename: function (req, file, cb) {
-      
       cb(null, Date.now() +'_'+ file.originalname.replace(/[^A-Za-z0-9\.]/g,''))
     }
   }),
@@ -67,22 +66,22 @@ app.post('/photo', upload.single('photo'), function(req, res, next) {
       }})
     }
   }
-  
+});
 
-  // const now = Date.now().toString()
-  // s3.upload({
-  //   Bucket: 'emergencyindex',
-  //   ACL: 'public-read',
-  //   ContentType: 'application/json',
-  //   Key: `${now}.json`,
-  //   Body: JSON.stringify({now: now, zomg: 'd00d'})
-  // },function (err, data) {
-  // if (err) {
-  //   res.send("Error" + err);
-  // } if (data) {
-  //   res.send("Upload Success " + data.Location);
-  // }})
-  
+app.post('/submit', function(req, res, next) {
+  const now = Date.now().toString()
+  s3.upload({
+    Bucket: 'emergencyindex',
+    ACL: 'public-read',
+    ContentType: 'application/json',
+    Key: `${now}.json`,
+    Body: JSON.stringify(req.body)
+  },function (err, data) {
+  if (err) {
+    res.send({success: false, error: "Error: " + err});
+  } if (data) {
+    res.send({success: true, data: 'Thank You!'});
+  }})
 });
 
 // listen for requests :D
