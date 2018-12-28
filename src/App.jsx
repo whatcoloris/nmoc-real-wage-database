@@ -492,8 +492,8 @@ class App extends React.Component {
               </div>
 
               <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" fullWidth>Submit</Button>
-              {this.state.submitError && <p className={classes.error}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</p>}
-              {this.state.validationError && <div><p>{this.state.validationError}</p><p>If you want to submit your entry as-is <Button href="#" onClick={this.submit}>click here.</Button> NOTE: incomplete submissions will likely not get read!</p></div>}
+              {this.state.submitError && <Typography component="p" className={classes.error}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</Typography>}
+              {this.state.validationError && <div><Typography component="p" className={classes.error}> {this.state.validationError}</Typography><Typography component="p" >If you want to submit your entry as-is <Button href="#" onClick={this.submit}>click here.</Button> NOTE: incomplete submissions will likely not get read!</Typography></div>}
             </form>
           </React.Fragment>}
           {this.state.submitSuccess && <Typography variant="h4" component="h4" className={classes.thankyou}>{this.state.submitSuccess}<div><span role="img" aria-label="smile cat">😸</span></div></Typography>}
