@@ -74,7 +74,7 @@ app.post('/photo', upload.single('photo'), function(req, res, next) {
 });
 
 app.post('/submit', function(req, res, next) {
-  console.log('submit req.body:',req.body);
+  // console.log('submit req.body:',req.body);
   const now = Date.now().toString()
   s3.upload({
     Bucket: 'emergencyindex',
