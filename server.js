@@ -60,7 +60,7 @@ app.post('/photo', upload.single('photo'), function(req, res, next) {
         Bucket: 'emergencyindex',
         ACL: 'public-read',
         ContentType: req.file.mimetype,
-        Key: `submissions/${req.file.filename}`,
+        Key: `submissions/images/${req.file.filename}`,
         Body: fs.createReadStream(req.file.path)
       },function (err, data) {
       if (err) {
