@@ -4,6 +4,7 @@ const s3 = new aws.S3({
   endpoint: spacesEndpoint
 });
 
+
 let keys = [];
 
 s3.listObjects({Bucket:'emergencyindex'})
@@ -49,11 +50,12 @@ function getData(){
         });
       })
     );
-    
-  })
+  });
   
   Promise.all(promises).then( function(data) {
     console.log('promises data:', data);
+  }).catch( function(err) {
+    console.log('caught err', err)
   });
 }
 
