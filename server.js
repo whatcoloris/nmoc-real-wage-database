@@ -133,8 +133,43 @@ app.get('/submissions', function(req, res) {
     });
 
     Promise.all(promises).then( function(data) {
-      console.log('promises data:', data);
-      res.json(data);
+      // console.log('promises data:', data);
+      
+      const json2csv = require('json2csv').parse;
+      const fields = [
+        'contact_name',
+        'contact_email',
+        'contact_postal',
+        'contact_phone',
+        'title',
+        'contributor',
+        'collaborators',
+        'date_first_performed',
+        'times_performed',
+        'venue',
+        'city',
+        'state_country',
+        'home',
+        'published_contact',
+        'links',
+        'description',
+        'photo_credit',
+        'photoUrl',
+        'already_submitted',
+        'wants_to_get_involved',
+        'wants_to_host',
+        'validationError'
+      ];
+      try {
+        const csv = json2csv(data, { fields });
+        // console.log(csv);
+        res.send(csv);
+      } catch (err) {
+        console.error('csv err:',err);
+        res.json({error: err});
+      }
+
+      
     }).catch( function(err) {
       console.log('caught err', err)
       res.json({error: err});
