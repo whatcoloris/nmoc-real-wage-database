@@ -60,7 +60,7 @@ app.post('/photo', upload.single('photo'), function(req, res, next) {
         Bucket: 'emergencyindex',
         ACL: 'public-read',
         ContentType: req.file.mimetype,
-        Key: `uploads/${req.file.filename}`,
+        Key: `submissions/${req.file.filename}`,
         Body: fs.createReadStream(req.file.path)
       },function (err, data) {
       if (err) {
@@ -80,7 +80,7 @@ app.post('/submit', function(req, res, next) {
     Bucket: 'emergencyindex',
     ACL: 'public-read',
     ContentType: 'application/json',
-    Key: `${now}.json`,
+    Key: `submissions/${now}.json`,
     Body: JSON.stringify(req.body)
   },function (err, data) {
   if (err) {
@@ -92,7 +92,7 @@ app.post('/submit', function(req, res, next) {
 
 app.get('/submissions', function(req, res) {
   let keys = [];
-  s3.listObjects({Bucket:'emergencyindex'})
+  s3.listObjects({Bucket:'emergencyindex', Prefix: 'submissions/'})
   .on('success', function handlePage(item) {
     item.data.Contents.forEach(function(item) {
       if(item.Key.match(/.json/)){

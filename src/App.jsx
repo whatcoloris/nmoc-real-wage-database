@@ -324,14 +324,14 @@ class App extends React.Component {
   submit() {
     console.log('submit, state is:',this.state);
     const postData = { 
-      data: [ 
-        ...this.state.project_form.items.map( i => i.value ), 
-        this.state.photoUrl, 
-        this.state.project_form.already_submitted, 
-        this.state.project_form.wants_to_get_involved, 
-        this.state.project_form.wants_to_host,  
-        this.state.validationError 
-      ], 
+      data: { 
+        ...this.state.project_form.items.map( i => ({[i.id]: i.value}) ), 
+        photoUrl: this.state.photoUrl, 
+        already_submitted: this.state.project_form.already_submitted,
+        wants_to_get_involved: this.state.project_form.wants_to_get_involved,
+        wants_to_host: this.state.project_form.wants_to_host,
+        validationError: this.state.validationError
+      }, 
       state: this.state
     }
     console.log('gonna submit:',postData);
