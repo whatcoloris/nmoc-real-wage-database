@@ -35,7 +35,7 @@ let keys = [];
             } else {
               const project_form = JSON.parse(data.Body);
               // console.log('project_form.data', project_form.data)
-              if (project_form.data && project_form.data.length > 0){
+              if (project_form.data){
                 resolve(project_form.data);
               }else{
                 resolve();
@@ -47,7 +47,7 @@ let keys = [];
     });
 
     Promise.all(promises).then( function(data) {
-      // console.log('promises data:', data);
+      console.log('promises data:', data);
       /*
       
       {
@@ -59,34 +59,15 @@ let keys = [];
       project_form.items.0.value
       */
       const json2csv = require('json2csv').parse;
-      const fields = [
-        'contact_name',
-        'contact_email',
-        'contact_postal',
-        'contact_phone',
-        'title',
-        'contributor',
-        'collaborators',
-        'date_first_performed',
-        'times_performed',
-        'venue',
-        'city',
-        'state_country',
-        'home',
-        'published_contact',
-        'links',
-        'description',
-        'photo_credit',
-        'photoUrl',
-        'already_submitted',
-        'wants_to_get_involved',
-        'wants_to_host',
-        'validationError'
-      ];
-      data.project_form.items.map( item => ({label: item.id, value: , default: 'NULL'}) )
-      
+      const fields = data.project_form.items.map( (item, idx) => ({label: item.id, value: `project_form.items.${idx}.value`, default: 'NULL'}) )
+      fields.push({label: 'photoUrl', value: 'photoUrl', default: 'NULL'})
+      fields.push({label: 'already_submitted', value: 'project_form.already_submitted', default: 'NULL'})
+      fields.push({label: 'wants_to_get_involved', value: 'project_form.wants_to_get_involved', default: 'NO'})
+      fields.push({label: 'wants_to_host', value: 'project_form.wants_to_host', default: 'NO'})
+      fields.push({label: 'validationError', value: 'validationError', default: 'NO'})
       
       try {
+        // console.log('data:',data)
         const csv = json2csv(data, { fields });
         console.log('CSV:,', csv);
         // res.send(csv);
