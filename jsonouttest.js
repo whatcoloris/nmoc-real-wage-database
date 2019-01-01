@@ -4,12 +4,15 @@ const s3 = new aws.S3({
   endpoint: spacesEndpoint
 });
 let out_data = [];
+let promises = [];
 
 s3.listObjects({Bucket:'emergencyindex'}).
 on('success', function handlePage(item) {
   item.data.Contents.forEach( item => {
     if(item.Key.match(/.json/)){
-      s3.getObject({
+      promises.push(
+        new Promise(function(resolve, reject) {
+          s3.getObject({
        Bucket: 'emergencyindex', 
        Key: item.Key
       }, function(err, data) {
@@ -23,6 +26,9 @@ on('success', function handlePage(item) {
           }
         }
       });
+        })
+      );
+      
     }
   })
   if(item.hasNextPage()) {
