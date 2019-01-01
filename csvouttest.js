@@ -48,18 +48,8 @@ let keys = [];
 
     Promise.all(promises).then( function(data) {
       console.log('promises data:', data);
-      /*
-      
-      {
-        label: 'some label',
-        value: 'path.to.something',
-        default: 'NULL'
-      }
-      
-      project_form.items.0.value
-      */
       const json2csv = require('json2csv').parse;
-      const fields = data.project_form.items.map( (item, idx) => ({label: item.id, value: `project_form.items.${idx}.value`, default: 'NULL'}) )
+      const fields = data[0].project_form.items.map( (item, idx) => ({label: item.id, value: `project_form.items.${idx}.value`, default: 'NULL'}) )
       fields.push({label: 'photoUrl', value: 'photoUrl', default: 'NULL'})
       fields.push({label: 'already_submitted', value: 'project_form.already_submitted', default: 'NULL'})
       fields.push({label: 'wants_to_get_involved', value: 'project_form.wants_to_get_involved', default: 'NO'})
