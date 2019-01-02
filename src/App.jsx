@@ -486,7 +486,7 @@ class App extends React.Component {
                 <Divider variant="middle" />
               </div>
 
-              <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" fullWidth>Submit</Button>
+              <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" disabled={this.state.isUploadingPhoto} fullWidth>Submit</Button>
               {this.state.submitError && <Typography component="p" className={classes.submitError}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</Typography>}
               {this.state.validationError && <div><Typography component="p" className={classes.submitError}> {this.state.validationError}</Typography><Typography component="p" className={classes.submitError}>If you want to submit your entry as-is <Button href="#" onClick={this.submit}>click here.</Button></Typography><Typography component="p" className={classes.submitError}> NOTE: incomplete submissions will likely not get read!</Typography></div>}
             </form>
