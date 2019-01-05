@@ -103,14 +103,6 @@ const project_form = {
       error: false,
       validator: blankValidator
     },{
-      id: "contact_postal",
-      label: "CONTACT POSTAL ADDRESS",
-      help: "This will not be published. A postal address is required.",
-      value: "",
-      required: true,
-      error: false,
-      validator: blankValidator
-    },{
       id: "contact_phone",
       label: "CONTACT PHONE NUMBER",
       help: "This will not be published. A phone number is required.",
@@ -120,26 +112,26 @@ const project_form = {
       validator: blankValidator
     },{
       id: "title",
-      label: "TITLE OF PIECE (PLEASE WRITE IN ALL CAPS)",
-      help: "",
+      label: "TITLE OF PIECE",
+      help: "This will be printed in all caps in the heading of the work, however we will use American Title Capitalization style for the body of the text, unless there is unusual capitalization indicated here.",
       value: "",
       required: true,
       error: false,
       validator: blankValidator
     },{
       id: "contributor",
-      label: "NAME(S) OF CREATOR(S) OR GROUP (PLEASE WRITE IN ALL CAPS)",
+      label: "NAME(S) OF CREATOR(S) OR GROUP",
       help:
-        "This will be the byline. If you would like the byline to include both the group name and the name of the primary collaborator(s) who constitute that group, please use a slash; e.g. “THE BEATLES / GEORGE HARRISON, JOHN LENNON, PAUL MCCARTNEY & RINGO STARR.” Please don't use this field for other collaborators and participants; there will be a field below for them.",
+        "This will be the byline. If more than one author, please separate by commas. Please don't use this field for other collaborators and participants; there will be a field below for them. ",
       value: "",
       required: true,
       error: false,
       validator: blankValidator
     },{
       id: "collaborators",
-      label: "Names(s) of Other Key Collaborators (Please write in Title Case)",
+      label: "Names(s) of Other Collaborators",
       help:
-        "This will appear as a sub-byline. Please only list key collaborators; do not include sponsoring and producing institutions, curators, festivals, audience participants, etc. (if absolutely necessary, these specifics can be included at the end of your performance description). Because space is limited, please do NOT include the roles of the key collaborators; e.g., (composer) Bjork. If such information is necessary please include it in your description.",
+        "This will appear as a sub-byline. Please only list key collaborators; do not include sponsoring and producing institutions, curators, festivals, audience participants, etc. (if absolutely necessary, these specifics can be included at the end of your performance description). Because space is limited, please do NOT include the roles of the key collaborators; e.g., (composer) Bjork.",
       value: "",
       required: false,
       error: false,
@@ -148,7 +140,7 @@ const project_form = {
       id: "date_first_performed",
       label: "Date of First Performance",
       help:
-        "If the performance was durational, indicate the start date here, and specify the duration in the field below. ***IF THE FIRST PERFORMANCE OF YOUR WORK PRECEDED JANUARY 1, 2018, IT CANNOT BE ACCEPTED.***",
+        "If the performance was durational, indicate the start date. ***IF THE FIRST PERFORMANCE OF YOUR WORK PRECEDED JANUARY 1, 2018, IT CANNOT BE ACCEPTED.***",
       value: "",
       required: true,
       error: false,
@@ -191,7 +183,7 @@ const project_form = {
     },{
       id: "home",
       label:
-        "Where are the creators based? City, State (if in the US), and Country (if outside of the US).",
+        "Where are the creators based? (to be published; optional)",
       help:
         'If the creator lives in multiple cities, use "&": e.g., Brooklyn, NY & Tokyo, Japan. If group members are based in different cities, use slashes: e.g., New York, NY / Tokyo, Japan / Paris, France.',
       value: "",
@@ -387,20 +379,16 @@ class App extends React.Component {
               Emergency INDEX allows you to report and document novel strategies,
               innovations and ideas in a performance-based work you made in 2018. To
               submit a performance for INDEX Vol. 8, please fill out the form below.
-              Once you complete this form, you will also need to email an image to
-              accompany your submission; details on this are below.
             </Typography>
             <Typography className={classes.info} component="p">
-              Guidelines are adjacent to each prompt; please read them carefully.
-              You may want to prepare your *performance description* on a separate
-              word document first and then cut-and-paste the final draft into the
-              field below. If you have questions, please see our FAQ page, or email
-              us at emergencyindex2018@gmail.com. The deadline is 
-              <b> January 6, 2019 at midnight PST</b>; this deadline is strict, and
-              we cannot consider submissions sent after this date. Please submit
-              only one work; authors and collectives who submit more than one work
-              will be disqualified. Please read all the instructions, and follow the
-              guidelines carefully.
+              If you have questions, please see our <a href="https://emergencyindex.com/submit/faq/" target="_blank" rel="noopener noreferrer">FAQ page</a>, or email
+              us at emergencyindex@uglyducklingpresse.org. 
+            </Typography>
+            <Typography className={classes.info} component="p">
+              The deadline is <b> February 15, 2019 at 11:59pm  EST</b>; 
+              this deadline is strict, and we cannot consider submissions sent 
+              after this date. Please submit only one work; authors and collectives 
+              who submit more than one work will be disqualified.
             </Typography>
             <Typography className={classes.required} component="p">
               * Required
