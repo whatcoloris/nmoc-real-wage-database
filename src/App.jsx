@@ -185,7 +185,7 @@ const project_form = {
       label:
         "Where are the creators based? (to be published; optional)",
       help:
-        'If the creator lives in multiple cities, use "&": e.g., Brooklyn, NY & Tokyo, Japan. If group members are based in different cities, use slashes: e.g., New York, NY / Tokyo, Japan / Paris, France.',
+        'Listing your base can help local audiences find you. Please list City, State (if in the US), and Country (if outside of the US). If the creator lives in multiple cities, use "&": e.g., Brooklyn, NY & Tokyo, Japan. If group members are based in different cities, use slashes: e.g., New York, NY / Tokyo, Japan / Paris, France.',
       value: "",
       required: false,
       error: false,
@@ -193,18 +193,18 @@ const project_form = {
     },
     {
       id: "published_contact",
-      label: "Creator(s)/Group contact email (to be published; optional)",
+      label: "Creator/Group contact email (to be published; optional)",
       help:
-        "If you must use more than one email address, separate them with a slash; e.g., emergency@uglyducklingpresse.org / emergencyindex2018@gmail.com. Please do not include more than two addresses.",
+        "We cannot include more than one email address.",
       value: "",
       required: false,
       error: false,
       validator: blankValidator
     },{
       id: "links",
-      label: "Creator(s)/Group website (to be published; optional)",
+      label: "Creator/Group website (to be published; optional)",
       help:
-        "Please do not use more than two websites. If two, separate with a slash; e.g., www.emergencyindex.com / www.uglyducklingpresse.org",
+        "We cannot include more than one website.",
       value: "",
       required: false,
       error: false,
@@ -213,14 +213,14 @@ const project_form = {
       id: "description",
       label: "Description of performance",
       help:
-        'The description may not exceed 400 words; if it does it will be discarded and your submission will not be read. Because INDEX includes many different genres of performance, your description *must* include an explanation of the purpose of the work, the problematic the performance was made to address, or the context to which the work responded. *Also required* is a description of the performance itself; focus on describing whatever you think is particularly salient, or innovative, or most relevant. Use this as an opportunity to document what you think was most important about the work. Note that performance titles should be in quotes, while film and book titles should be italicized. (Please use asterisks to indicate italics where necessary); e.g. “Of Mice and Mice” was a mash-up of Steinbeck’s *Of Mice and Men* and the 1939 film *Gone with the Wind*. Generally, we encourage you to use the first-person "I" and "we" instead of the third-person "the artist."',
+        'The description may not exceed 400 words; if it does it will be discarded and your submission will not be read. Because INDEX includes many different genres of performance, your description *must* include an explanation of the purpose of the work, the problematic the performance was made to address, or the context to which the work responded. The description of the performance itself should give the reader a sense of what happened, with particular focus on the way the work dealt with the challenges at hand... Note that performance titles should be in quotes, while film and book titles should be italicized. (Please use asterisks to indicate italics where necessary); e.g. “Of Mice and Mice” was a mash-up of Steinbeck’s *Of Mice and Men* and the 1939 film *Gone with the Wind*. Generally, we encourage you to use the first-person "I" and "we" instead of the third-person "the artist."',
       value: "",
       required: true,
       error: false,
       validator: descriptionValidator
     },{
       id: "photo_credit",
-      label: "Photo Credit",
+      label: "Image Credit",
       help:
         "Please enter the name of the person the photo/image should be credited to.",
       value: "",
@@ -230,8 +230,6 @@ const project_form = {
     }
   ],
   already_submitted: undefined,
-  wants_to_get_involved: undefined,
-  wants_to_host: undefined,
   inProgress: undefined
 };
 
@@ -250,7 +248,6 @@ class App extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
-    this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePhotoChange = this.handlePhotoChange.bind(this);
     this.submit = this.submit.bind(this);
@@ -282,16 +279,6 @@ class App extends React.Component {
     this.setState(
       (prevState) => {
         prevState.project_form[key] = event.target.value;
-        return prevState;
-      }
-    );
-  }
-  
-  handleCheckbox(event, key) {
-    event.persist();
-    this.setState(
-      (prevState) => {
-        prevState.project_form[key] = event.target.checked;
         return prevState;
       }
     );
@@ -422,7 +409,8 @@ class App extends React.Component {
 
               <FormField
                 label="Image"
-                help="Image file needs to be 5x7 inches (1500x2100 pixels) or 7x5 inches (2100x1500 pixels), greyscale (b&w), @ 300dpi. It can be oriented vertically or horizontally. It can be a photo, but can also be a sketch or diagram. It should not be a flyer, poster, or promotional material. You must have all permissions to publish the image. The image should be saved as a .tif file."
+                help="It should not be a flier, poster, or promotional material. You must have all
+permissions to publish the image. The published image will be 5x7 (portrait or landscape orientation) and black & white (grayscale). We will adjust any image sent to this format, cropping if necessary. Please deliver files in the highest resolution possible at a minimum 300 DPI at 5x7 inches or 1500 x 2100 pixels. JPEG or TIFF files preferred"
                 required>
                 <br/>
                 <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />
@@ -444,31 +432,12 @@ class App extends React.Component {
                   <FormControlLabel value="no" control={<Radio />} label="No" />
                 </RadioGroup>
               </FormField>
-
-              <FormField
-                label="If you are interested in getting involved in the production of Emergency Index, please check the box below."
-                help="">
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox onChange={(event) => this.handleCheckbox(event, 'wants_to_get_involved')} value="yes" />
-                    }
-                    label="Yes" />
-                </FormGroup>
-              </FormField>
-
-
-              <FormField
-                label="If you are interested in hosting an Emergency Index-related event, check the box below."
-                help="">
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox onChange={(event) => this.handleCheckbox(event, 'wants_to_host')} value="yes" />
-                    }
-                    label="Yes" />
-                </FormGroup>
-              </FormField>
+              
+              <Typography component="p" className={classes.info}>
+                If you are interested in hosting an Emergency Index-related event or helping 
+                with the production of Emergency Index, please email 
+                emergency@uglyducklingpresse.org
+              </Typography>
 
               <div className={classes.divider}>
                 <Divider variant="middle" />

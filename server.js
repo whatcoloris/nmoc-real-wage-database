@@ -138,8 +138,6 @@ app.get('/submissions', function(req, res) {
       const fields = data[0].project_form.items.map( (item, idx) => ({label: item.id, value: `project_form.items.${idx}.value`, default: 'NULL'}) )
       fields.push({label: 'photoUrl', value: 'photoUrl', default: 'NULL'})
       fields.push({label: 'already_submitted', value: 'project_form.already_submitted', default: 'NULL'})
-      fields.push({label: 'wants_to_get_involved', value: 'project_form.wants_to_get_involved', default: 'NO'})
-      fields.push({label: 'wants_to_host', value: 'project_form.wants_to_host', default: 'NO'})
       fields.push({label: 'validationError', value: 'validationError', default: 'NO'})
       
       try {
