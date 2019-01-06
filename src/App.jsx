@@ -86,7 +86,8 @@ class App extends React.Component {
       photoName: undefined,
       submitError: undefined,
       validationError: undefined,
-      submitSuccess: undefined
+      submitSuccess: undefined,
+      date_submitted: new Date()
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleRadio = this.handleRadio.bind(this);

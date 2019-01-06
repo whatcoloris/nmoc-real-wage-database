@@ -75,12 +75,12 @@ app.post('/photo', upload.single('photo'), function(req, res, next) {
 
 app.post('/submit', function(req, res, next) {
   // console.log('submit req.body:',req.body);
-  const now = Date.now().toString()
+  const key = `${Date.now().toString()}_${Math.floor(Math.random() * 10000)}`
   s3.upload({
     Bucket: 'emergencyindex',
     ACL: 'public-read',
     ContentType: 'application/json',
-    Key: `submissions/${now}.json`,
+    Key: `submissions/${key}.json`,
     Body: JSON.stringify(req.body)
   },function (err, data) {
   if (err) {
