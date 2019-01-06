@@ -2,18 +2,18 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Visit [their repository](https://github.com/facebookincubator/create-react-app) for more information and help.
 
-Shout-out to [Material](https://material-ui.com/)
+Shout-out to [Material-UI](https://material-ui.com/)
 
 ## Helpful information about the files:
 
 #### Files that will probably need to be edited: 
 
-The files inside `src/form` directory contain most of the text snippits relevant to this form.
+The files inside `src/form/` directory contain most of the text snippits relevant to this form.
 
-`src/form/FormFooter.jsx` Text for the content after the form
-`src/form/FormHeading.jsx` Text for the beginning of the form
-`src/form/FormInfo.jsx` Paragraph text that comes after the heading
-`src/form/ProjectForm.js` Fields for form questions
+* `src/form/FormFooter.jsx` Text for the content after the form
+* `src/form/FormHeading.jsx` Text for the beginning of the form
+* `src/form/FormInfo.jsx` Paragraph text that comes after the heading
+* `src/form/ProjectForm.js` Fields for form questions
 
 ProjectForm includes a number of items that are defined like:
 
@@ -31,21 +31,31 @@ ProjectForm includes a number of items that are defined like:
 
 #### Other files
 
-`dist/*` everything in this folder is generated; DO NOT EDIT
+* `dist/*` everything in this folder is generated; DO NOT EDIT
+* `public/index.html` base HTML file 
+* `src/components/FormField.jsx` a React component for form fields
+* `src/App.jsx` main component and logic for this form
+* `src/App.test.js` a really simple test
+* `src/index.css` global styles (use sparingly; prefer `createStyles()`)
+* `src/index.js` entry point into app
+* `src/withRoot.jsx` wrapper for Material styles
+* `.env` secrets for Google & s3 bucket access needs something like:
 
-`public/index.html` base HTML file 
+```sh
+NODE_ENV=production
+CLIENT_EMAIL=some@email
+PRIVATE_KEY=somekey
+KEY_ID=somekeyID
+ACCESS_KEY=someaccesskey
+AWS_ACCESS_KEY_ID=somekeyid
+AWS_SECRET_ACCESS_KEY=somesecret
+```
 
-`src/components/FormField.jsx` a React component for form fields
-
-`src/App.jsx` main component and logic for this form
-
-`src/App.test.js` a really simple test
-
-`index.css` global styles (use sparingly
+* `server.js` nodeJS express server for handling HTTP requests
 
 ## Creating a production build
 
-* Run the command `npm run build` in the console using (note: click **Logs > Console**)
+* Run the command `npm run build` in the console (note: click **Logs > Console**)
 
 
 ## MISC
