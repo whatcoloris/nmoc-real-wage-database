@@ -1,5 +1,7 @@
 # Emergency INDEX Vol. 8 Submission form
 
+https://emergency-index-submission-2018.glitch.me/
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Visit [their repository](https://github.com/facebookincubator/create-react-app) for more information and help.
 
 Shout-out to [Material-UI](https://material-ui.com/)
@@ -29,7 +31,12 @@ ProjectForm includes a number of items for each individual response field that a
 }
 ```
 
-**NOTE:** if you decide to add/remove response field items then new submissions will not appear correctly on the google spreadsheet 
+**NOTE:** if you decide to add/remove response field items then new submissions will not appear correctly (columns will not match up) on the google spreadsheet because the fields get mapped based on the fields in the first response. see: https://glitch.com/edit/#!/emergency-index-submission-2018?path=server.js:143:25  
+```js
+const fields = data[0].project_form.items.map( (item, idx) => ({label: item.id, value: `project_form.items.${idx}.value`, default: 'NULL'}) )
+```  
+#TODO: this code could be improved.  
+also, if you remove field items then other parts of the code might break :/  
 
 #### Other files
 
@@ -43,6 +50,8 @@ ProjectForm includes a number of items for each individual response field that a
 * `util/*` misc nodeJS scripts for google & s3 API integrations. mostly just test stuff that isn't otherwise used.
 * `.env` secret keyz for Google, s3 bucket, and /submissions access
 * `server.js` nodeJS express server for handling HTTP requests
+* `package.json` project data and npm dependencies
+* `watch.json` special file for glitch to prevent automatic reloading when files change
 
 ## Creating a production build
 
