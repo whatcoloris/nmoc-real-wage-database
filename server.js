@@ -91,7 +91,7 @@ app.post('/submit', function(req, res, next) {
 });
 
 app.get('/submissions', function(req, res) {
-  if (req.query.key != process.env.queryKey) {
+  if (req.query.key != process.env.QUERY_KEY) {
     res.status(404).send('Not found')
     return
   }
