@@ -258,23 +258,19 @@ class App extends React.Component {
   }
 
   inputTypeFor(id){
-    function test(str) {
-      switch (true) {
-        case /xyz/.test(str):
-          display("• Matched 'xyz' test");
-          break;
-        case /test/.test(str):
-          display("• Matched 'test' test");
-          break;
-        case /ing/.test(str):
-          display("• Matched 'ing' test");
-          break;
-        default:
-          display("• Didn't match any test");
-          break;
-      }
-  }
-        
+    if (/date/.test(id)) {
+      return 'date';
+    } else if (/times_performed/.test(id)) {
+      return 'number'; 
+    } else if (/email/.test(id) || /published_contact/.test(id)) {
+      return 'email'; 
+    } else if (/phone/.test(id)) {
+      return 'tel'; 
+    } else if (/links/.test(id)) {
+      return 'url'; 
+    } else {
+      return 'text';
+    }
   }
   
   handleChange(event, idx) {
@@ -414,7 +410,7 @@ class App extends React.Component {
                   <TextField
                     value={field.value}
                     id={field.id}
-                    type={field.id.match(/date/) ? "date" : "text"}
+                    type={this.inputTypeFor(field.id)}
                     className={classes.textField}
                     onChange={(event) => this.handleChange(event, idx)}
                     placeholder="Your Answer"
