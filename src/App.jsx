@@ -15,7 +15,10 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 import withRoot from "./withRoot";
 import FormField from "./FormField";
-import {FormHeading, FormInfo, FormFooter, ProjectForm} from "./EmergencyIndex";
+import FormHeading from "./FormHeading";
+import FormInfo from "./FormInfo";
+import FormFooter from "./FormFooter";
+import ProjectForm from "./ProjectForm";
 
 const styles = (theme) =>
   createStyles({
