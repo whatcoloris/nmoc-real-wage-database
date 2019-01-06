@@ -23,7 +23,7 @@
     "start": "if-env NODE_ENV=production && npm run prod:start || npm run dev:start",
     "dev:start": "react-scripts start",
     "prod:start": "node server.js",
-    "build": "react-scripts build && gzip -rk build && refresh"
+    "build": "react-scripts build && gzip -rk build && rm -rf dist/ && mv build/ dist/ && refresh"
   },
   "license": "MIT",
   "engines": {

@@ -286,7 +286,7 @@ class App extends React.Component {
 
               <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" disabled={this.state.isUploadingPhoto} fullWidth>Submit</Button>
               {this.state.submitError && <Typography component="p" className={classes.submitError}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</Typography>}
-              {this.state.validationError && <div><Typography component="h6" className={classes.submitError}> {this.state.validationError}</Typography><Typography component="p" className={classes.submitError}>If you want to submit your entry as-is <Button href="#" onClick={this.submit}>click here.</Button></Typography><Typography component="p" className={classes.submitError}> <b>NOTE: incomplete submissions will likely not get read!</b></Typography></div>}
+              {this.state.validationError && <div><Typography component="h6" className={classes.submitError}> {this.state.validationError} <br/>Please correct these errors and click the "Submit" button again.</Typography><Typography component="p" className={classes.submitError}>If you want to submit your entry as-is <Button href="#" onClick={this.submit}>click here.</Button></Typography><Typography component="p" className={classes.submitError}><b>NOTE: incomplete submissions will likely not get read!</b></Typography></div>}
             </form>
           </React.Fragment>}
           {this.state.submitSuccess && <Typography variant="h4" component="h4" className={classes.thankyou}>{this.state.submitSuccess}<div><span role="img" aria-label="smile cat">😸</span></div></Typography>}
