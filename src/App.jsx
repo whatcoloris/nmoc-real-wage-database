@@ -74,6 +74,10 @@ const styles = (theme) =>
     submitError: {
       color: 'red',
       margin: '1.5em 0'
+    },
+    wantsToHelp: {
+      fontStyle: 'italic',
+      margin: '1em 0'
     }
   });
 
@@ -129,7 +133,7 @@ const project_form = {
       validator: blankValidator
     },{
       id: "collaborators",
-      label: "Names(s) of Other Collaborators",
+      label: "Name(s) of Other Collaborators",
       help:
         "This will appear as a sub-byline. Please only list key collaborators; do not include sponsoring and producing institutions, curators, festivals, audience participants, etc. (if absolutely necessary, these specifics can be included at the end of your performance description). Because space is limited, please do NOT include the roles of the key collaborators; e.g., (composer) Bjork.",
       value: "",
@@ -253,6 +257,26 @@ class App extends React.Component {
     this.submit = this.submit.bind(this);
   }
 
+  inputTypeFor(id){
+    function test(str) {
+      switch (true) {
+        case /xyz/.test(str):
+          display("• Matched 'xyz' test");
+          break;
+        case /test/.test(str):
+          display("• Matched 'test' test");
+          break;
+        case /ing/.test(str):
+          display("• Matched 'ing' test");
+          break;
+        default:
+          display("• Didn't match any test");
+          break;
+      }
+  }
+        
+  }
+  
   handleChange(event, idx) {
     event.persist();
     this.setState(
@@ -369,7 +393,7 @@ class App extends React.Component {
             </Typography>
             <Typography className={classes.info} component="p">
               If you have questions, please see our <a href="https://emergencyindex.com/submit/faq/" target="_blank" rel="noopener noreferrer">FAQ page</a>, or email
-              us at emergencyindex@uglyducklingpresse.org. 
+              us at emergency@uglyducklingpresse.org. 
             </Typography>
             <Typography className={classes.info} component="p">
               The deadline is <b> February 15, 2019 at 11:59pm  EST</b>; 
@@ -433,7 +457,7 @@ permissions to publish the image. The published image will be 5x7 (portrait or l
                 </RadioGroup>
               </FormField>
               
-              <Typography component="p" className={classes.info}>
+              <Typography className={classes.wantsToHelp} component="p">
                 If you are interested in hosting an Emergency Index-related event or helping 
                 with the production of Emergency Index, please email 
                 emergency@uglyducklingpresse.org
