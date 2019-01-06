@@ -35,9 +35,6 @@ const styles = (theme) =>
     headline: {
       marginBottom: theme.spacing.unit * 2
     },
-    beta: {
-      color: '#f1f'
-    },
     info: {
       marginTop: theme.spacing.unit * 2
     },
@@ -258,6 +255,19 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePhotoChange = this.handlePhotoChange.bind(this);
     this.submit = this.submit.bind(this);
+    window.onbeforeunload = function() {
+      return "Are you sure you want to navigate away? Your changes will be lost.";
+    }
+    window.addEventListener('beforeunload', function (e) {
+      if (this.state.inProgress) {
+        alert("Are you sure you want to navigate away? Your changes will be lost.")  
+      }
+      // Cancel the event
+      e.preventDefault();
+      // Chrome requires returnValue to be set
+      e.returnValue = '';
+    });
+
   }
 
   inputTypeFor(id){
@@ -369,7 +379,7 @@ class App extends React.Component {
     );
     event.target.value = '';
   }
-
+  
   render() {
     const { classes } = this.props;
     return (
@@ -381,9 +391,6 @@ class App extends React.Component {
           <Typography variant="h4" component="h4" className={classes.headline}>
             Vol. 8 Submissions
           </Typography>
-          <Typography variant="h4" component="h4" className={classes.beta}>
-            NOTE: this is just a test form! <br />don't submit actual performance. 
-          </Typography>
           {!this.state.submitSuccess && <React.Fragment>
             <Typography component="p" className={classes.info}>
               Emergency INDEX allows you to report and document novel strategies,
@@ -392,7 +399,7 @@ class App extends React.Component {
             </Typography>
             <Typography className={classes.info} component="p">
               If you have questions, please see our <a href="https://emergencyindex.com/submit/faq/" target="_blank" rel="noopener noreferrer">FAQ page</a>, or email
-              us at emergency@uglyducklingpresse.org. 
+              us at <a href="mailto:emergency@uglyducklingpresse.org">emergency@uglyducklingpresse.org</a>.
             </Typography>
             <Typography className={classes.info} component="p">
               The deadline is <b> February 15, 2019 at 11:59pm  EST</b>; 
