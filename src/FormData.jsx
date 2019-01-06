@@ -1,3 +1,4 @@
+import * as React from "react";
 import Typography from "@material-ui/core/Typography";
 
 const blankValidator = (value) => value.length === 0;
@@ -6,24 +7,59 @@ const descriptionValidator = (value) => {
   return current_length > 400 || current_length < 2;
 };
 
+
+export class FormHeading extends React.Component {
+  render() {
+    return (
+      <div>
+        <Typography variant="h3" component="h3" className="headline">
+          Emergency INDEX
+        </Typography>
+        <Typography variant="h4" component="h4" className="headline">
+          Vol. 8 Submissions
+        </Typography>
+      </div>
+    );
+  }
+}
+
+export class FormInfo extends React.Component {
+  render() {
+    return (
+      <div>
+        <Typography component="p" className="info">
+          Emergency INDEX allows you to report and document novel strategies,
+          innovations and ideas in a performance-based work you made in 2018. To
+          submit a performance for INDEX Vol. 8, please fill out the form below.
+        </Typography>
+        <Typography className="info" component="p">
+          If you have questions, please see our <a href="https://emergencyindex.com/submit/faq/" target="_blank" rel="noopener noreferrer">FAQ page</a>, or email
+          us at <a href="mailto:emergency@uglyducklingpresse.org">emergency@uglyducklingpresse.org</a>.
+        </Typography>
+        <Typography className="info" component="p">
+          The deadline is <b> February 15, 2019 at 11:59pm  EST</b>; 
+          this deadline is strict, and we cannot consider submissions sent 
+          after this date. Please submit only one work; authors and collectives 
+          who submit more than one work will be disqualified.
+        </Typography>
+      </div>
+    );
+  }
+}
+
+export class FormFooter extends React.Component {
+  render() {
+    return (
+      <Typography className="wantsToHelp" component="p">
+        If you are interested in hosting an Emergency Index-related event or helping 
+        with the production of Emergency Index, please email 
+        emergency@uglyducklingpresse.org
+      </Typography>
+    );
+  }
+}
+
 export default FormData = {
-  heading: <div>
-    <Typography component="p" className="info">
-      Emergency INDEX allows you to report and document novel strategies,
-      innovations and ideas in a performance-based work you made in 2018. To
-      submit a performance for INDEX Vol. 8, please fill out the form below.
-    </Typography>
-    <Typography className="info" component="p">
-      If you have questions, please see our <a href="https://emergencyindex.com/submit/faq/" target="_blank" rel="noopener noreferrer">FAQ page</a>, or email
-      us at <a href="mailto:emergency@uglyducklingpresse.org">emergency@uglyducklingpresse.org</a>.
-    </Typography>
-    <Typography className="info" component="p">
-      The deadline is <b> February 15, 2019 at 11:59pm  EST</b>; 
-      this deadline is strict, and we cannot consider submissions sent 
-      after this date. Please submit only one work; authors and collectives 
-      who submit more than one work will be disqualified.
-    </Typography>
-  </div>,
   project_form: {
     items: [
       {
@@ -174,10 +210,5 @@ export default FormData = {
     inProgress: undefined 
   },
   image_help: "It should not be a flier, poster, or promotional material. You must have all permissions to publish the image. The published image will be 5x7 (portrait or landscape orientation) and black & white (grayscale). We will adjust any image sent to this format, cropping if necessary. Please deliver files in the highest resolution possible at a minimum 300 DPI at 5x7 inches or 1500 x 2100 pixels. JPEG or TIFF files preferred",
-  already_submitted_help: "Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?",
-  footer: <Typography className="wantsToHelp" component="p">
-      If you are interested in hosting an Emergency Index-related event or helping 
-      with the production of Emergency Index, please email 
-      emergency@uglyducklingpresse.org
-    </Typography>
+  already_submitted_help: "Have you, or any of the people named above, already submitted a performance for this volume of Emergency Index?"
 }

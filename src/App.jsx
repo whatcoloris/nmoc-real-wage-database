@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
@@ -33,9 +32,6 @@ const styles = (theme) =>
       flexWrap: "wrap",
       marginTop: theme.spacing.unit * 4
     },
-    headline: {
-      marginBottom: theme.spacing.unit * 2
-    },
     required: { marginTop: theme.spacing.unit * 2, color: "red" },
     textField: {},
     label: {},
@@ -55,8 +51,8 @@ const styles = (theme) =>
       margin: '2em 0'
     },
     footer: {
-      textAlign: 'right',
-      margin: '1em 1em 0'
+      textAlign: 'center',
+      margin: '3em 1em 0'
     },
     footerLink: {
       color: 'black',
@@ -221,14 +217,9 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Paper className={classes.root} elevation={1}>
-          <Typography variant="h3" component="h3" className={classes.headline}>
-            Emergency INDEX
-          </Typography>
-          <Typography variant="h4" component="h4" className={classes.headline}>
-            Vol. 8 Submissions
-          </Typography>
+          {FormData.heading}
           {!this.state.submitSuccess && <React.Fragment>
-            {FormData.heading}
+            {FormData.info}
             <Typography className={classes.required} component="p">
               * Required
             </Typography>

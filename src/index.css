@@ -17,11 +17,15 @@ a:hover {
   text-align: right;   
 }
 
+.headline {
+  margin-bottom: 32px;
+}
+
 .info {
   margin-top: 32px;
 }
 
-.wantsToHelp: {
-      fontStyle: 'italic',
-      margin: '1em 0'
-    },
+.wantsToHelp {
+  font-style: italic;
+  margin: 1em 0;
+}
