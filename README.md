@@ -1,17 +1,17 @@
 # Emergency INDEX Vol. 8 Submission form
 
-view: https://emergency-index-submission-2018.glitch.me/
-edit: https://glitch.com/edit/#!/emergency-index-submission-2018
+view: https://emergency-index-submission-2018.glitch.me/  
+edit: https://glitch.com/edit/#!/emergency-index-submission-2018  
+github: https://github.com/emergencyindex/emergency-index-submission-2018 
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Visit [their repository](https://github.com/facebookincubator/create-react-app) for more information and help.
-
-Shout-out to [Material-UI](https://material-ui.com/)
+🗣 [Create React App](https://github.com/facebookincubator/create-react-app)  
+🗣 [Material-UI](https://material-ui.com/)
 
 ## Helpful information about the files:
 
 #### Files that will probably need to be edited: 
 
-The files inside `src/form/` directory contain most of the text snippits relevant to this form.
+The files inside `src/form/` directory contain most of the text snippets relevant to this form.
 
 * `src/form/FormHeading.jsx` Text for the beginning of the form
 * `src/form/FormInfo.jsx` Paragraph text that comes after the heading
@@ -42,7 +42,7 @@ also, if you remove field items then other parts of the code might break :/
 #### Other files
 
 * `public/index.html` base HTML file 
-* `src/components/FormField.jsx` a React component for form fields
+* `src/components/FormField.jsx` a React component for individual form fields
 * `src/App.jsx` main React component and logic for this form
 * `src/App.test.js` a really simple test
 * `src/index.css` global styles (use sparingly; prefer `createStyles()`)
@@ -52,14 +52,14 @@ also, if you remove field items then other parts of the code might break :/
 * `.env` secret keyz for Google, s3 bucket, and /submissions access
 * `package.json` project data and npm dependencies
 * `watch.json` special file for glitch to prevent automatic reloading when files change
-* `.gitignore` files that will be omitted from git source control
+* `.gitignore` files that will be omitted from git source control & glitch editor list of files
 * `server.js` nodeJS express server for handling HTTP requests
 
 notes about `server.js`  
 * serves the React app (located in the `dist/` folder)
-* processing image uploads (via `multer` npm module & s3 storage); validates file type (.tif, .jpg, & .png) and image dimensions (at least 5x7 inches @300 dpi)
+* processing image uploads (via `multer` & `image-size` npm module; stored in `/tmp/` then sent to digitalocean s3-compatible storage); validates file type (.tif, .jpg, & .png) and image dimensions (at least 5x7 inches @300 dpi)
 * processing submissions (.json files stored in s3 bucket)
-* generating CSV for google spreadsheet (fetches all .json files from s3 bucket); CSV can be imported into google sheet like so:
+* generating CSV (via `json2csv` npm module) for google spreadsheet (fetches all .json files from s3 bucket); CSV can be imported into google sheet like so:
 
 ```
 =IMPORTDATA("https://emergency-index-submission-2018.glitch.me/submissions?key=WHATEVER_QUERY_KEY_SET_IN_.env")
