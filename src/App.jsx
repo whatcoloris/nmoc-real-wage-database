@@ -55,7 +55,7 @@ const styles = (theme) =>
     },
     footer: {
       textAlign: 'center',
-      margin: '5em 1em 0'
+      margin: '6em 1em 0'
     },
     footerLink: {
       color: 'black',
@@ -293,7 +293,7 @@ class App extends React.Component {
         </Paper>
         <footer className={classes.footer}>
           <a 
-            href="https://github.com/edwardsharp" 
+            href="https://github.com/emergencyindex/emergency-index-submission-2018" 
             target="_blank" 
             rel="noopener noreferrer" 
             className={classes.footerLink}>

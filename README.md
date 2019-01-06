@@ -1,6 +1,7 @@
 # Emergency INDEX Vol. 8 Submission form
 
-https://emergency-index-submission-2018.glitch.me/
+view: https://emergency-index-submission-2018.glitch.me/
+edit: https://glitch.com/edit/#!/emergency-index-submission-2018
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Visit [their repository](https://github.com/facebookincubator/create-react-app) for more information and help.
 
