@@ -1,5 +1,6 @@
 import * as React from "react";
 import Typography from "@material-ui/core/Typography";
+import withRoot from "./withRoot";
 
 const blankValidator = (value) => value.length === 0;
 const descriptionValidator = (value) => {
@@ -8,7 +9,7 @@ const descriptionValidator = (value) => {
 };
 
 
-export class FormHeading extends React.Component {
+class FormHeading extends React.Component {
   render() {
     return (
       <div>
@@ -23,7 +24,9 @@ export class FormHeading extends React.Component {
   }
 }
 
-export class FormInfo extends React.Component {
+export const FormHeading = withRoot(FormHeading);
+
+class FormInfo extends React.Component {
   render() {
     return (
       <div>
@@ -47,7 +50,9 @@ export class FormInfo extends React.Component {
   }
 }
 
-export class FormFooter extends React.Component {
+export const FormInfo = withRoot(FormInfo);
+
+class FormFooter extends React.Component {
   render() {
     return (
       <Typography className="wantsToHelp" component="p">
@@ -59,7 +64,9 @@ export class FormFooter extends React.Component {
   }
 }
 
-export default FormData = {
+export const FormFooter = withRoot(FormFooter);
+
+export const ProjectForm = {
   project_form: {
     items: [
       {

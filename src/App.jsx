@@ -15,7 +15,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 import withRoot from "./withRoot";
 import FormField from "./FormField";
-import FormData from "./FormData";
+import {FormHeading, FormInfo, FormFooter, ProjectForm} from "./EmergencyIndex";
 
 const styles = (theme) =>
   createStyles({
@@ -76,7 +76,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      project_form: FormData.project_form,
+      project_form: ProjectForm.project_form,
       photoError: undefined,
       isUploadingPhoto: false,
       photoUrl: undefined,
@@ -217,14 +217,14 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Paper className={classes.root} elevation={1}>
-          {FormData.heading}
+          <FormHeading />
           {!this.state.submitSuccess && <React.Fragment>
-            {FormData.info}
+            <FormInfo />
             <Typography className={classes.required} component="p">
               * Required
             </Typography>
             <form className={classes.container}>
-              {FormData.project_form.items.map((field, idx) => (
+              {ProjectForm.project_form.items.map((field, idx) => (
                 <FormField
                   label={field.label}
                   help={field.help}
@@ -252,7 +252,7 @@ class App extends React.Component {
 
               <FormField
                 label="Image"
-                help={FormData.image_help}
+                help={ProjectForm.image_help}
                 required>
                 <br/>
                 <input type="file" name="photo" accept=".tif,.tiff, image/tiff, .jpg,.jpeg,.JPG, image/jpeg, .png,.PNG, image/png" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto} />
@@ -262,7 +262,7 @@ class App extends React.Component {
               </FormField>
 
               <FormField
-                label={FormData.already_submitted_help}
+                label={ProjectForm.already_submitted_help}
                 help=""
                 required>
                 <RadioGroup
@@ -275,7 +275,7 @@ class App extends React.Component {
                 </RadioGroup>
               </FormField>
               
-              {FormData.footer}
+              <FormFooter />
 
               <div className={classes.divider}>
                 <Divider variant="middle" />
