@@ -21,8 +21,9 @@ class FormInfo extends React.Component {
           submit a performance for INDEX Vol. 8, please fill out the form below.
         </Typography>
         <Typography className={classes.info} component="p">
-          If you have questions, please see our <a href="https://emergencyindex.com/submit/faq/" target="_blank" rel="noopener noreferrer">FAQ page</a>, or email
-          us at <a href="mailto:emergency@uglyducklingpresse.org">emergency@uglyducklingpresse.org</a>.
+          If you have questions email us at <a href="mailto:emergency@uglyducklingpresse.org">emergency@uglyducklingpresse.org</a>.
+        </Typography>
+        <Typography className={classes.info}>
         </Typography>
         <Typography className={classes.info} component="p">
           The deadline is <b>February 15, 2019 at 11:59pm EST</b>; 
