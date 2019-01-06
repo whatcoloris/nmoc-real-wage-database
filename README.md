@@ -49,10 +49,20 @@ also, if you remove field items then other parts of the code might break :/
 * `src/withRoot.jsx` wrapper for Material-UI styles
 * `util/*` misc nodeJS scripts for google & s3 API integrations. mostly just test stuff that isn't otherwise used.
 * `.env` secret keyz for Google, s3 bucket, and /submissions access
-* `server.js` nodeJS express server for handling HTTP requests
 * `package.json` project data and npm dependencies
 * `watch.json` special file for glitch to prevent automatic reloading when files change
 * `.gitignore` files that will be omitted from git source control
+* `server.js` nodeJS express server for handling HTTP requests
+
+notes about `server.js`  
+* serves the React app (located in the `dist/` folder)
+* processing image uploads (via `multer` npm module & s3 storage); validates file type (.tif, .jpg, & .png) and image dimensions (at least 5x7 inches @300 dpi)
+* processing submissions (.json files stored in s3 bucket)
+* generating CSV for google spreadsheet (fetches all .json files from s3 bucket); CSV can be imported into google sheet like so:
+
+```
+=IMPORTDATA("https://emergency-index-submission-2018.glitch.me/submissions?key=WHATEVER_QUERY_KEY_SET_IN_.env")
+```
 
 ## Creating a production build
 
