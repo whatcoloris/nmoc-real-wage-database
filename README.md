@@ -2,10 +2,46 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). Visit [their repository](https://github.com/facebookincubator/create-react-app) for more information and help.
 
+Shout-out to [Material](https://material-ui.com/)
+
 ## Helpful information about the files:
 
-`dist/*` everything in the dist/`
+#### Files that will probably need to be edited: 
 
+The files inside `src/form` directory contain most of the text snippits relevant to this form.
+
+`src/form/FormFooter.jsx` Text for the content after the form
+`src/form/FormHeading.jsx` Text for the beginning of the form
+`src/form/FormInfo.jsx` Paragraph text that comes after the heading
+`src/form/ProjectForm.js` Fields for form questions
+
+ProjectForm includes a number of items that are defined like:
+
+```js
+{
+  id: "some_field", // lower-case, no spaces or special characters
+  label: "SOME FIELD LABEL",
+  help: "This text will appear after the label",
+  value: "", // place holder for what the user will enter
+  required: true, // required or not
+  error: false, // place holder for validation results
+  validator: blankValidator // function for determining if field is valid
+}
+```
+
+#### Other files
+
+`dist/*` everything in this folder is generated; DO NOT EDIT
+
+`public/index.html` base HTML file 
+
+`src/components/FormField.jsx` a React component for form fields
+
+`src/App.jsx` main component and logic for this form
+
+`src/App.test.js` a really simple test
+
+`index.css` global styles (use sparingly
 
 ## Creating a production build
 
