@@ -91,6 +91,11 @@ app.post('/submit', function(req, res, next) {
 });
 
 app.get('/submissions', function(req, res) {
+  if (req.query.key != process.env.queryKey) {
+    res.status(404).send('Not found')
+    return
+  }
+  
   let keys = [];
   s3.listObjects({Bucket:'emergencyindex', Prefix: 'submissions/'})
   .on('success', function handlePage(item) {
