@@ -192,7 +192,7 @@ class App extends React.Component {
   }
   
   handlePhotoChange(event) {
-    this.setState({isUploadingPhoto: true, photoName: event.target.files[0].name, photoError: undefined});
+    this.setState({isUploadingPhoto: true, photoName: event.target.files[0].name, photoError: undefined, inProgress: true});
     
     const data = new FormData();
     data.append('photo', event.target.files[0]);

@@ -10,10 +10,10 @@ Shout-out to [Material-UI](https://material-ui.com/)
 
 The files inside `src/form/` directory contain most of the text snippits relevant to this form.
 
-* `src/form/FormFooter.jsx` Text for the content after the form
 * `src/form/FormHeading.jsx` Text for the beginning of the form
 * `src/form/FormInfo.jsx` Paragraph text that comes after the heading
 * `src/form/ProjectForm.js` Fields for form questions
+* `src/form/FormFooter.jsx` Text for the content after the form
 
 ProjectForm includes a number of items for each individual response field that are defined like:
 
@@ -28,6 +28,8 @@ ProjectForm includes a number of items for each individual response field that a
   validator: blankValidator // function for determining if field is valid
 }
 ```
+
+**NOTE:** if you decide to add/remove response field items then new submissions will not appear correctly on the google spreadsheet 
 
 #### Other files
 
