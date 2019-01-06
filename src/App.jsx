@@ -78,6 +78,9 @@ const styles = (theme) =>
     wantsToHelp: {
       fontStyle: 'italic',
       margin: '1em 0'
+    },
+    photoName: {
+      display: 'inline' 
     }
   });
 
@@ -314,7 +317,7 @@ class App extends React.Component {
     });
     const error_items = items.filter( i => i.error );
     if(error_items.length > 0){
-      this.setState({project_form: { items }, validationError: 'Oops, please type a response for '+error_items.length+' missing required field(s)!', submitError: undefined, submitSuccess: false});
+      this.setState({project_form: { items }, validationError: 'Oops, please type a response for '+error_items.length+' missing required fields!', submitError: undefined, submitSuccess: false});
     }else{
       this.submit();
     }
@@ -400,7 +403,7 @@ class App extends React.Component {
             <Typography className={classes.required} component="p">
               * Required
             </Typography>
-            <form className={classes.container} noValidate autoComplete="off">
+            <form className={classes.container}>
               {project_form.items.map((field, idx) => (
                 <FormField
                   label={field.label}
@@ -433,10 +436,10 @@ class App extends React.Component {
 permissions to publish the image. The published image will be 5x7 (portrait or landscape orientation) and black & white (grayscale). We will adjust any image sent to this format, cropping if necessary. Please deliver files in the highest resolution possible at a minimum 300 DPI at 5x7 inches or 1500 x 2100 pixels. JPEG or TIFF files preferred"
                 required>
                 <br/>
-                <input type="file" name="photo" accept=".tif,.tiff, image/tiff" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />
+                <input type="file" name="photo" accept=".tif,.tiff, image/tiff, .jpg,.jpeg,.JPG, image/jpeg, .png" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />
                 {this.state.isUploadingPhoto && <LinearProgress />}
-                {this.state.photoError && <div className={classes.error}>{this.state.photoError}</div>}
-                {this.state.photoName && <b>{this.state.photoName}</b>}
+                {this.state.photoError && <Typography component="p" className={classes.error}>{this.state.photoError}</Typography>}
+                {this.state.photoName && <Typography component="h6" className={classes.photoName}>{this.state.photoName}</Typography>}
               </FormField>
 
               <FormField
@@ -465,7 +468,7 @@ permissions to publish the image. The published image will be 5x7 (portrait or l
 
               <Button onClick={this.handleSubmit} variant="contained" color="primary" size="large" disabled={this.state.isUploadingPhoto} fullWidth>Submit</Button>
               {this.state.submitError && <Typography component="p" className={classes.submitError}>Oh noz! Something bad happened and your submission cannot be processed right now. Please email emergencyindex2018@gmail.com</Typography>}
-              {this.state.validationError && <div><Typography component="p" className={classes.submitError}> {this.state.validationError}</Typography><Typography component="p" className={classes.submitError}>If you want to submit your entry as-is <Button href="#" onClick={this.submit}>click here.</Button></Typography><Typography component="p" className={classes.submitError}> NOTE: incomplete submissions will likely not get read!</Typography></div>}
+              {this.state.validationError && <div><Typography component="h6" className={classes.submitError}> {this.state.validationError}</Typography><Typography component="p" className={classes.submitError}>If you want to submit your entry as-is <Button href="#" onClick={this.submit}>click here.</Button></Typography><Typography component="p" className={classes.submitError}> <b>NOTE: incomplete submissions will likely not get read!</b></Typography></div>}
             </form>
           </React.Fragment>}
           {this.state.submitSuccess && <Typography variant="h4" component="h4" className={classes.thankyou}>{this.state.submitSuccess}<div><span role="img" aria-label="smile cat">😸</span></div></Typography>}
