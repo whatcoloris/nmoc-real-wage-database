@@ -52,6 +52,7 @@ also, if you remove field items then other parts of the code might break :/
 * `server.js` nodeJS express server for handling HTTP requests
 * `package.json` project data and npm dependencies
 * `watch.json` special file for glitch to prevent automatic reloading when files change
+* `.gitignore` files that will be omitted from git source control
 
 ## Creating a production build
 
