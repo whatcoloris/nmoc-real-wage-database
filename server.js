@@ -105,7 +105,7 @@ app.get('/submissions', function(req, res) {
       }
     })
     if(item.hasNextPage()) {
-      // another page: handle it
+      // another page? handle it.
       item.nextPage().on('success', handlePage).send();
     }
   }).on('error', function(err) {

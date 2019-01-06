@@ -31,33 +31,20 @@ ProjectForm includes a number of items for each individual response field that a
 
 #### Other files
 
-* `dist/*` everything in this folder is generated; DO NOT EDIT
 * `public/index.html` base HTML file 
 * `src/components/FormField.jsx` a React component for form fields
-* `src/App.jsx` main component and logic for this form
+* `src/App.jsx` main React component and logic for this form
 * `src/App.test.js` a really simple test
 * `src/index.css` global styles (use sparingly; prefer `createStyles()`)
 * `src/index.js` entry point into app
-* `src/withRoot.jsx` wrapper for Material styles
-* `util/*` misc nodeJS scripts for google & s3 API integrations
-* `.env` secrets for Google & s3 bucket access needs something like:
-
-```sh
-NODE_ENV=production
-CLIENT_EMAIL=some@email
-PRIVATE_KEY=somekey
-KEY_ID=somekeyID
-ACCESS_KEY=someaccesskey
-AWS_ACCESS_KEY_ID=somekeyid
-AWS_SECRET_ACCESS_KEY=somesecret
-```
-
+* `src/withRoot.jsx` wrapper for Material-UI styles
+* `util/*` misc nodeJS scripts for google & s3 API integrations. mostly just test stuff that isn't otherwise used.
+* `.env` secret keyz for Google, s3 bucket, and /submissions access
 * `server.js` nodeJS express server for handling HTTP requests
 
 ## Creating a production build
 
 * Run the command `npm run build` in the console (note: click **Logs > Console**)
-
 
 ## MISC
 
