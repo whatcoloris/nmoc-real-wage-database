@@ -167,8 +167,7 @@ class App extends React.Component {
     if(error_items.length > 0){
       this.setState({project_form: { items }, validationError: 'Oops, please type a response for '+error_items.length+' missing required fields!', submitError: undefined, submitSuccess: false});
     }else{
-      this.setState({validationError: undefined});
-      this.submit();
+      this.setState({validationError: undefined}, () => this.submit());
     }
   }
   
