@@ -15,7 +15,7 @@ The files inside `src/form/` directory contain most of the text snippits relevan
 * `src/form/FormInfo.jsx` Paragraph text that comes after the heading
 * `src/form/ProjectForm.js` Fields for form questions
 
-ProjectForm includes a number of items that are defined like:
+ProjectForm includes a number of items for each individual response field that are defined like:
 
 ```js
 {
