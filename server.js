@@ -138,30 +138,21 @@ app.get('/submissions', function(req, res) {
     });
 
     Promise.all(promises).then( function(data) {
-      // console.log('promises data:', data);
       const json2csv = require('json2csv').parse;
       const fields = data[0].project_form.items.map( (item, idx) => ({label: item.id, value: `project_form.items.${idx}.value`, default: 'NULL'}) )
       fields.push({label: 'photoUrl', value: 'photoUrl', default: 'NULL'})
       fields.push({label: 'already_submitted', value: 'project_form.already_submitted', default: 'NULL'})
       fields.push({label: 'validationError', value: 'validationError', default: 'NO'})
-      // #TODO: add submitted date to form.
-      // try{
-      //   fields.push({label: 'date_submitted', value: function(item){return new Date(item.photoUrl.match(/\d+_/)[0].replace(/_/,''))}, default: ''});
-      // }catch(e){ console.warn(e); }
-      
+      fields.push({label: 'date_submitted', value: 'date_submitted', default: 'NULL'})
       try {
-        // console.log('data:',data)
         const csv = json2csv(data, { fields });
-        // console.log('CSV:,', csv);
         res.send(csv);
       } catch (err) {
         console.error('csv err:',err);
         res.json({error: err});
       }
-
-      
     }).catch( function(err) {
-      console.log('caught err', err)
+      console.error('caught err', err)
       res.json({error: err});
     });
     
