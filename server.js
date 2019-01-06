@@ -40,11 +40,11 @@ const upload = multer({
 });
 
 // http://expressjs.com/en/starter/static-files.html
-app.use(express.static("build"));
+app.use(express.static("dist"));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function(request, response) {
-  response.sendFile(__dirname + "/build/index.html");
+  response.sendFile(__dirname + "/dist/index.html");
 });
 
 app.post('/photo', upload.single('photo'), function(req, res, next) {

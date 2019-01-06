@@ -14,11 +14,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import withRoot from "./withRoot";
-import FormField from "./FormField";
-import FormHeading from "./FormHeading";
-import FormInfo from "./FormInfo";
-import FormFooter from "./FormFooter";
-import ProjectForm from "./ProjectForm";
+import FormField from "./components/FormField";
+import FormHeading from "./form/FormHeading";
+import FormInfo from "./form/FormInfo";
+import FormFooter from "./form/FormFooter";
+import ProjectForm from "./form/ProjectForm";
 
 const styles = (theme) =>
   createStyles({
@@ -55,7 +55,7 @@ const styles = (theme) =>
     },
     footer: {
       textAlign: 'center',
-      margin: '3em 1em 0'
+      margin: '5em 1em 0'
     },
     footerLink: {
       color: 'black',

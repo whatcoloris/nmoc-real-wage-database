@@ -1,6 +1,6 @@
 import * as React from "react";
 import Typography from "@material-ui/core/Typography";
-import withRoot from "./withRoot";
+import withRoot from "../withRoot";
 
 class FormFooter extends React.Component {
   render() {

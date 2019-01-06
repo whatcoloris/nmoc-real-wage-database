@@ -2,7 +2,7 @@ import * as React from "react";
 import Typography from "@material-ui/core/Typography";
 import createStyles from "@material-ui/core/styles/createStyles";
 import withStyles from "@material-ui/core/styles/withStyles"; // , { WithStyles }
-import withRoot from "./withRoot";
+import withRoot from "../withRoot";
 
 const styles = (theme) =>
   createStyles({
@@ -12,12 +12,6 @@ const styles = (theme) =>
     help: { color: '#666' }
   });
 
-// interface Props {
-//   label: string;
-//   help?: string;
-//   required: boolean;
-// }
-//<WithStyles<typeof styles> & Props>
 class FormField extends React.Component {
   render() {
     const { classes } = this.props;

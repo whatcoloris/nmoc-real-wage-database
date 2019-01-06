@@ -1,21 +1,30 @@
 import * as React from "react";
 import Typography from "@material-ui/core/Typography";
-import withRoot from "./withRoot";
+import createStyles from "@material-ui/core/styles/createStyles";
+import withStyles from "@material-ui/core/styles/withStyles"; // , { WithStyles }
+import withRoot from "../withRoot";
+
+const styles = (theme) =>
+  createStyles({
+    root: { },
+    info: {marginTop: theme.spacing.unit * 4}
+  });
 
 class FormInfo extends React.Component {
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <Typography component="p" className="info">
+        <Typography component="p" className={classes.info}>
           Emergency INDEX allows you to report and document novel strategies,
           innovations and ideas in a performance-based work you made in 2018. To
           submit a performance for INDEX Vol. 8, please fill out the form below.
         </Typography>
-        <Typography className="info" component="p">
+        <Typography className={classes.info} component="p">
           If you have questions, please see our <a href="https://emergencyindex.com/submit/faq/" target="_blank" rel="noopener noreferrer">FAQ page</a>, or email
           us at <a href="mailto:emergency@uglyducklingpresse.org">emergency@uglyducklingpresse.org</a>.
         </Typography>
-        <Typography className="info" component="p">
+        <Typography className={classes.info} component="p">
           The deadline is <b> February 15, 2019 at 11:59pm  EST</b>; 
           this deadline is strict, and we cannot consider submissions sent 
           after this date. Please submit only one work; authors and collectives 
@@ -26,4 +35,4 @@ class FormInfo extends React.Component {
   }
 }
 
-export default withRoot(FormInfo);
+export default withRoot(withStyles(styles)(FormInfo));
