@@ -436,7 +436,7 @@ class App extends React.Component {
 permissions to publish the image. The published image will be 5x7 (portrait or landscape orientation) and black & white (grayscale). We will adjust any image sent to this format, cropping if necessary. Please deliver files in the highest resolution possible at a minimum 300 DPI at 5x7 inches or 1500 x 2100 pixels. JPEG or TIFF files preferred"
                 required>
                 <br/>
-                <input type="file" name="photo" accept=".tif,.tiff, image/tiff, .jpg,.jpeg,.JPG, image/jpeg, .png" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto || this.state.photoUrl} />
+                <input type="file" name="photo" accept=".tif,.tiff, image/tiff, .jpg,.jpeg,.JPG, image/jpeg, .png,.PNG, image/png" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto} />
                 {this.state.isUploadingPhoto && <LinearProgress />}
                 {this.state.photoError && <Typography component="p" className={classes.error}>{this.state.photoError}</Typography>}
                 {this.state.photoName && <Typography component="h6" className={classes.photoName}>{this.state.photoName}</Typography>}

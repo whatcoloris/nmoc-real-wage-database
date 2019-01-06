@@ -28,11 +28,11 @@ const upload = multer({
     }
   }),
   fileFilter: function (req, file, cb) {
-    const filetypes = /tif|tiff/;
+    const filetypes = /tif|tiff|jpg|jpeg|png/;
     const mimetype = filetypes.test(file.mimetype);
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     if (!mimetype || !extname) {
-      req.fileValidationError = "Error: Photo upload only supports .tif or .tiff files!";
+      req.fileValidationError = "Error: Image upload only supports .tif, .tiff, .jpg, .jpeg, or .png files!";
       return cb(null, false, new Error(req.fileValidationError));
     }
     return cb(null, true);
@@ -52,9 +52,9 @@ app.post('/photo', upload.single('photo'), function(req, res, next) {
     res.json({success: false, error: req.fileValidationError});
   } else {
     const d = sizeOf(req.file.path)
-    const isInvalidSize = (d.width != 1500 && d.width != 2100) || (d.height != 1500 && d.height != 2100);
+    const isInvalidSize = (d.width < 1500 && d.width < 2100) || (d.height < 1500 && d.height < 2100);
     if(isInvalidSize) {
-      res.json({success: false, error: "Image needs to be 5x7 (1500x2100 pixels) or 7x5 inches (2100x1500 pixels). Your photo is "+d.width+"x"+d.height});
+      res.json({success: false, error: "Image needs to be at least 5x7 (1500x2100 pixels) or 7x5 inches (2100x1500 pixels). Your image is "+d.width+"px wide by "+d.height+"px tall"});
     } else {
       s3.upload({
         Bucket: 'emergencyindex',
