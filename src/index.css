@@ -16,3 +16,12 @@ a:hover {
 #description-helper-text{
   text-align: right;   
 }
+
+.info {
+  margin-top: 32px;
+}
+
+.wantsToHelp: {
+      fontStyle: 'italic',
+      margin: '1em 0'
+    },
