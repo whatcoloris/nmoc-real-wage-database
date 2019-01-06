@@ -54,7 +54,7 @@ const styles = (theme) =>
     },
     thankyou: {
       textAlign: 'center',
-      margin: theme.spacing.unit * 2
+      margin: '2em 0'
     },
     footer: {
       textAlign: 'right',
