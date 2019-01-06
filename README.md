@@ -39,6 +39,7 @@ ProjectForm includes a number of items that are defined like:
 * `src/index.css` global styles (use sparingly; prefer `createStyles()`)
 * `src/index.js` entry point into app
 * `src/withRoot.jsx` wrapper for Material styles
+* `util/*` misc nodeJS scripts for google & s3 API integrations
 * `.env` secrets for Google & s3 bucket access needs something like:
 
 ```sh
