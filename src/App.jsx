@@ -255,21 +255,21 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePhotoChange = this.handlePhotoChange.bind(this);
     this.submit = this.submit.bind(this);
-    window.onbeforeunload = function() {
-      return "Are you sure you want to navigate away? Your changes will be lost.";
-    }
-    window.addEventListener('beforeunload', function (e) {
-      if (this.state.inProgress) {
-        alert("Are you sure you want to navigate away? Your changes will be lost.")  
-      }
-      // Cancel the event
-      e.preventDefault();
-      // Chrome requires returnValue to be set
-      e.returnValue = '';
-    });
-
+    this.beforeUnload = this.beforeUnload.bind(this);
+    window.addEventListener('beforeunload', this.beforeUnload);
   }
 
+  beforeUnload(e){
+    if (this.state.inProgress) {
+      if (!window.confirm("Are you sure you want to leave? Your changes will be lost.")) {
+        // Cancel the event
+        e.preventDefault();
+        // Chrome requires returnValue to be set
+        e.returnValue = '';
+      }
+    }
+  }
+  
   inputTypeFor(id){
     if (/date/.test(id)) {
       return 'date';
@@ -334,11 +334,9 @@ class App extends React.Component {
   }
   
   submit() {
-    console.log('submit, state is:',this.state);
     const postData = { 
       data: this.state
     }
-    // console.log('gonna submit:',postData);
     fetch('/submit', {
       method: 'POST',
       headers: {
@@ -349,7 +347,7 @@ class App extends React.Component {
     }).then(
       response => response.json()
     ).then(
-      resp => this.setState({submitError: resp.error, submitSuccess: resp.data })
+      resp => this.setState({submitError: resp.error, submitSuccess: resp.data, inProgress: false })
     ).catch(
       error => this.setState({submitError: true, submitSuccess: undefined})
     ); 
@@ -368,7 +366,6 @@ class App extends React.Component {
       response => response.json()
     ).then(
       resp => {
-        console.log(resp)
         this.setState({isUploadingPhoto: false, photoError: resp.error, photoUrl: resp.data});
       }
     ).catch(
