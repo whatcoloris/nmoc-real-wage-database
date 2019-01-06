@@ -144,6 +144,10 @@ app.get('/submissions', function(req, res) {
       fields.push({label: 'photoUrl', value: 'photoUrl', default: 'NULL'})
       fields.push({label: 'already_submitted', value: 'project_form.already_submitted', default: 'NULL'})
       fields.push({label: 'validationError', value: 'validationError', default: 'NO'})
+      // #TODO: add submitted date to form.
+      // try{
+      //   fields.push({label: 'date_submitted', value: function(item){return new Date(item.photoUrl.match(/\d+_/)[0].replace(/_/,''))}, default: ''});
+      // }catch(e){ console.warn(e); }
       
       try {
         // console.log('data:',data)
