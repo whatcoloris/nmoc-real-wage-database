@@ -7,6 +7,14 @@ github: https://github.com/emergencyindex/emergency-index-submission-2018
 🗣 [Create React App](https://github.com/facebookincubator/create-react-app)  
 🗣 [Material-UI](https://material-ui.com/)
 
+## Making changes
+
+* edit the file here in glitch; remember: filez AUTOSAVE!
+* Run the command `npm run build`
+* * to open glitch console: click **Logs** (button) **>** **Console** (button on the top of the little window that opens at the bottom of the window)
+
+**note about glitch & watch.json:** generally glitch is a hot-reload environment where changes you make automatically get saved and are live. this can be a little troublesome as delay in typing can deploy buggy code. enter the `watch.json` file. this will prevent automatic refresh on the files specified within. anything un-related to the react app will need this file "touched" (e.g. changed) to re-deploy the whole site. 
+
 ## Helpful information about the files:
 
 #### Files that will probably need to be edited: 
@@ -64,10 +72,6 @@ notes about `server.js`
 ```
 =IMPORTDATA("https://emergency-index-submission-2018.glitch.me/submissions?key=WHATEVER_QUERY_KEY_SET_IN_.env")
 ```
-
-## Creating a production build
-
-* Run the command `npm run build` in the console (note: click **Logs > Console**)
 
 ## MISC
 
