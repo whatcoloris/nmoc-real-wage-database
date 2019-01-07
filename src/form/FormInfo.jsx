@@ -24,7 +24,7 @@ class FormInfo extends React.Component {
           If you have questions email us at <a href="mailto:emergency@uglyducklingpresse.org">emergency@uglyducklingpresse.org</a>.
         </Typography>
         <Typography className={classes.info} component="p">
-        For examples from previous volumes, please click back to the submissions page.</Typography>
+          For examples from previous volumes, see the <a href="https://emergencyindex.com/submit/" target="_blank" rel="noopener noreferrer">submissions page</a>.</Typography>
         <Typography className={classes.info} component="p">
           The deadline is <b>February 15, 2019 at 11:59pm EST</b>; 
           this deadline is strict, and we cannot consider submissions sent 
