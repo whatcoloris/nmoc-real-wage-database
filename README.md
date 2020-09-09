@@ -1,8 +1,8 @@
-# Emergency INDEX Vol. 8 Submission form
+# New Music Organizing Caucus Real Wage Database form
 
-view: [https://emergency-index-submission-2018.glitch.me/](https://emergency-index-submission-2018.glitch.me/)  
-edit: [https://glitch.com/edit/#!/emergency-index-submission-2018](https://glitch.com/edit/#!/emergency-index-submission-2018)  
-github: [https://github.com/emergencyindex/emergency-index-submission-2018](https://github.com/emergencyindex/emergency-index-submission-2018) 
+view: [https://nmoc-real-wage-database.glitch.me/](https://nmoc-real-wage-database.glitch.me/)  
+edit: [https://glitch.com/edit/#!/nmoc-real-wage-database](https://glitch.com/edit/#!/enmoc-real-wage-database)  
+github: [https://github.com/emergencyindex/nmoc-real-wage-database](https://github.com/emergencyindex/emergency-index-submission-2018) 
 
 🗣 [Create React App](https://github.com/facebookincubator/create-react-app)  
 🗣 [Material-UI](https://material-ui.com/)
