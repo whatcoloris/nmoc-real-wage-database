@@ -7,7 +7,7 @@ github: [https://github.com/nmoc-real-wage-database](https://github.com/nmoc-rea
 🗣 [Create React App](https://github.com/facebookincubator/create-react-app)  
 🗣 [Material-UI](https://material-ui.com/)
 
-## Making changes
+## Making changes 
 
 * edit the file here in glitch; remember: filez AUTOSAVE!
 * Run the command `npm run build` in the console
