@@ -7,11 +7,11 @@ github: [https://github.com/nmoc-real-wage-database](https://github.com/nmoc-rea
 🗣 [Create React App](https://github.com/facebookincubator/create-react-app)  
 🗣 [Material-UI](https://material-ui.com/)
 
-## Making changes 
+## Making changes
 
 * edit the file here in glitch; remember: filez AUTOSAVE!
 * Run the command `npm run build` in the console
-* * to open glitch console: click **Logs** (button) **>** **Console** (button on the top of the little window that opens at the bottom of the window)
+* * to open glitch console: click **Tools** (button) **>** **Terminal** (button on the top of the little window that opens at the bottom of the window)
 
 **note about glitch & watch.json:** generally glitch is a hot-reload environment where changes you make automatically get saved and are live. this can be a little troublesome as delay in typing can deploy buggy code. enter the `watch.json` file. this will prevent automatic refresh on the files specified within. anything un-related to the react app (files in the `src/` directory) will need this file "touched" (e.g. changed) to re-deploy the whole site. 
 
@@ -70,7 +70,7 @@ notes about `server.js`
 * generating CSV (via `json2csv` npm module) for google spreadsheet (fetches all .json files from s3 bucket); CSV can be imported into google sheet like so:
 
 ```
-=IMPORTDATA("https://nmoc-real-wages-database.glitch.me/submissions?key=WHATEVER_QUERY_KEY_SET_IN_.env")
+=IMPORTDATA("https://nmoc-real-wage-database.glitch.me/submissions?key=WHATEVER_QUERY_KEY_SET_IN_.env")
 ```
 
 ## MISC
