@@ -11,7 +11,7 @@ github: [https://github.com/nmoc-real-wage-database](https://github.com/nmoc-rea
 
 * edit the file here in glitch; remember: filez AUTOSAVE!
 * Run the command `npm run build` in the console
-* * to open glitch console: click **Logs** (button) **>** **Console** (button on the top of the little window that opens at the bottom of the window)
+* * to open glitch console: click **Tools** (button) **>** **Terminal** (button on the top of the little window that opens at the bottom of the window)
 
 **note about glitch & watch.json:** generally glitch is a hot-reload environment where changes you make automatically get saved and are live. this can be a little troublesome as delay in typing can deploy buggy code. enter the `watch.json` file. this will prevent automatic refresh on the files specified within. anything un-related to the react app (files in the `src/` directory) will need this file "touched" (e.g. changed) to re-deploy the whole site. 
 
