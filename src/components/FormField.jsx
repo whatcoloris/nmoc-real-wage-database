@@ -15,20 +15,21 @@ const styles = (theme) =>
 class FormField extends React.Component {
   render() {
     const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <Typography variant="h6" component="h6" className={classes.label}>
-          {this.props.label}{" "}
-          {this.props.required && <span className={classes.required} title="Required">*</span>}
-        </Typography>
-        {this.props.help && (
-          <Typography component="p" className={classes.help}>
-            {this.props.help}
+    console.log(this.props.type);
+      return (
+        <div className={classes.root}>
+          <Typography variant="h6" component="h6" className={classes.label}>
+            {this.props.label}{" "}
+            {this.props.required && <span className={classes.required} title="Required">*</span>}
           </Typography>
-        )}
-        {this.props.children}
-      </div>
-    );
+          {this.props.help && (
+            <Typography component="p" className={classes.help}>
+              {this.props.help}
+            </Typography>
+          )}
+          {this.props.children}
+        </div>
+      );
   }
 }
 

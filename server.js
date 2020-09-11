@@ -1,22 +1,16 @@
 // server.js
 const express = require('express');
-const aws = require('aws-sdk');
 const multer = require('multer');
 const path = require('path');
-const sizeOf = require('image-size');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const sqlite3 = require('sqlite3');
 
 const app = express();
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-
-const spacesEndpoint = new aws.Endpoint('https://dynamodb.us-east-2.amazonaws.com');
-const s3 = new aws.S3({
-  endpoint: spacesEndpoint
-});
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static("dist"));

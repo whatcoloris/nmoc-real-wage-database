@@ -9,9 +9,11 @@ import TextField from "@material-ui/core/TextField";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import Select from '@material-ui/core/Select';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import withRoot from "./withRoot";
 import FormField from "./components/FormField";
@@ -80,10 +82,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       project_form: ProjectForm.project_form,
-      photoError: undefined,
-      isUploadingPhoto: false,
-      photoUrl: undefined,
-      photoName: undefined,
       submitError: undefined,
       validationError: undefined,
       submitSuccess: undefined,
@@ -92,7 +90,6 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePhotoChange = this.handlePhotoChange.bind(this);
     this.submit = this.submit.bind(this);
     this.beforeUnload = this.beforeUnload.bind(this);
     window.addEventListener('beforeunload', this.beforeUnload);
@@ -112,14 +109,22 @@ class App extends React.Component {
   inputTypeFor(id){
     if (/date/.test(id)) {
       return 'date';
-    } else if (/times_performed/.test(id)) {
+    } else if (/geographic_loc/.test(id)) {
+      return 'location'; 
+    } else if (/ensemble/.test(id)) {
+      return 'ensemble'; 
+    } else if (/venue/.test(id)) {
+      return 'venue'; 
+    } else if (/pay/.test(id)) {
+      return 'dollar_amt';
+    } else if (/services_num/.test(id) || /services_avg/.test(id)) {
       return 'number'; 
-    } else if (/email/.test(id) || /published_contact/.test(id)) {
-      return 'email'; 
-    } else if (/phone/.test(id)) {
-      return 'tel'; 
-    } else if (/links/.test(id)) {
-      return 'url'; 
+    } else if (/gig_type/.test(id)) {
+      return 'gig'; 
+    } else if (/contract/.test(id) || /gig_union/.test(id) || /paid_on_time/.test(id) || /per_diem/.test(id) || /extra_work/.test(id) || /red_flag/.test(id)) {
+      return 'boolean'; 
+    } else if (/presenter/.test(id)) {
+      return 'presenter'; 
     } else {
       return 'text';
     }
@@ -188,32 +193,8 @@ class App extends React.Component {
     ).then(
       resp => this.setState({submitError: resp.error, submitSuccess: resp.data, inProgress: false })
     ).catch(
-      error => this.setState({submitError: true, submitSuccess: undefined})
+      () => this.setState({submitError: true, submitSuccess: undefined})
     ); 
-  }
-  
-  handlePhotoChange(event) {
-    this.setState({isUploadingPhoto: true, photoName: event.target.files[0].name, photoError: undefined, inProgress: true});
-    
-    const data = new FormData();
-    data.append('photo', event.target.files[0]);
-
-    fetch('/photo', {
-      method: 'POST',
-      body: data
-    }).then(
-      response => response.json()
-    ).then(
-      resp => {
-        this.setState({isUploadingPhoto: false, photoError: resp.error, photoUrl: resp.data});
-      }
-    ).catch(
-      error => {
-        console.warn(error)
-        this.setState({isUploadingPhoto: false, photoError: error});
-      }
-    );
-    event.target.value = '';
   }
   
   render() {
@@ -234,7 +215,21 @@ class App extends React.Component {
                   help={field.help}
                   required={field.required}
                   key={idx}>
-                  <TextField
+                  {field.type === "select" &&
+                      <Select labelId="label" id="select" value="Neither">
+                        <MenuItem value="W2">W2</MenuItem>
+                        <MenuItem value="1099">1099</MenuItem>
+                        <MenuItem value="Neither">Neither</MenuItem>
+                      </Select>}
+                  {field.type === "radio" &&
+                      <RadioGroup
+                        className={classes.group}
+                        onChange={(event) => this.handleRadio(event, 'radio')}>
+                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                      </RadioGroup>}
+                  {field.type === "text" &&
+                    <TextField
                     value={field.value}
                     id={field.id}
                     type={this.inputTypeFor(field.id)}
@@ -251,33 +246,86 @@ class App extends React.Component {
                     helperText={field.helperText}
                     error={field.error}
                     fullWidth />
+                  }
+                  {field.type === "location" &&
+                    <TextField
+                    value={field.value}
+                    id={field.id}
+                    type={this.inputTypeFor(field.id)}
+                    className={classes.textField}
+                    onChange={(event) => this.handleChange(event, idx)}
+                    placeholder="Your Answer"
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    margin="normal"
+                    required={field.required}
+                    rowsMax={field.id === "description" ? 32 : 1}
+                    multiline={field.id === "description"}
+                    helperText={field.helperText}
+                    error={field.error}
+                    fullWidth />
+                  }
+                  {field.type === "number" &&
+                    <TextField
+                    value={field.value}
+                    id={field.id}
+                    type={this.inputTypeFor(field.id)}
+                    className={classes.textField}
+                    onChange={(event) => this.handleChange(event, idx)}
+                    placeholder="Your Answer"
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    margin="normal"
+                    required={field.required}
+                    rowsMax={field.id === "description" ? 32 : 1}
+                    multiline={field.id === "description"}
+                    helperText={field.helperText}
+                    error={field.error} />
+                  }
+                  {field.type === "currency" &&
+                    <OutlinedInput
+                      value={field.value}
+                      id={field.id}
+                      type={this.inputTypeFor(field.id)}
+                      className={classes.textField}
+                      onChange={(event) => this.handleChange(event, idx)}
+                      placeholder="Your Answer"
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      required={field.required}
+                      rowsMax={field.id === "description" ? 32 : 1}
+                      multiline={field.id === "description"}
+                      helperText={field.helperText}
+                      error={field.error}
+                      fullWidth
+                      startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    />}
+                  {field.notes === "yes" &&
+                    <div>
+                      <TextField
+                      value=""
+                      label="Notes: "
+                      id={field.id+"_notes"}
+                      type="text"
+                      className={classes.textField}
+                      onChange={(event) => this.handleChange(event, idx)}
+                      placeholder="Extra information regarding this question"
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      margin="normal"
+                      rowsMax={field.id === "description" ? 32 : 1}
+                      multiline={field.id === "description"}
+                      helperText={field.helperText}
+                      error={field.error}
+                      fullWidth />
+                    </div>}
                 </FormField>
               ))}
-
-              <FormField
-                label="Image"
-                help={ProjectForm.image_help}
-                required>
-                <br/>
-                <input type="file" name="photo" accept=".tif,.tiff, image/tiff, .jpg,.jpeg,.JPG, image/jpeg, .png,.PNG, image/png" onChange={this.handlePhotoChange} disabled={this.state.isUploadingPhoto} />
-                {this.state.isUploadingPhoto && <LinearProgress />}
-                {this.state.photoError && <Typography component="p" className={classes.error}>{this.state.photoError}</Typography>}
-                {this.state.photoName && <Typography component="h6" className={classes.photoName}>{this.state.photoName}</Typography>}
-              </FormField>
-
-              <FormField
-                label={ProjectForm.already_submitted_help}
-                help=""
-                required>
-                <RadioGroup
-                  aria-label="Already Submitted"
-                  name="already_submitted"
-                  className={classes.group}
-                  onChange={(event) => this.handleRadio(event, 'already_submitted')}>
-                  <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
-              </FormField>
               
               <FormFooter />
 
@@ -298,7 +346,7 @@ class App extends React.Component {
             target="_blank" 
             rel="noopener noreferrer" 
             className={classes.footerLink}>
-            Made with <span role="img" aria-label="black heart">🖤</span> in NYC
+            Made with <span role="img" aria-label="black heart">🖤</span> in Hurley, NY
           </a>
         </footer>
       </React.Fragment>

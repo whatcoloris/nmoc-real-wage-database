@@ -12,6 +12,8 @@ const ProjectForm = {
         label: "Geographic Location",
         help: "(city, state) of this place of work:",
         value: "",
+        type: "location",
+        notes: "no",
         required: true,
         error: false,
         validator: blankValidator
@@ -21,6 +23,8 @@ const ProjectForm = {
         help:
           "",
         value: "",
+        type: "text",
+        notes: "no",
         required: true,
         error: false,
         validator: blankValidator
@@ -29,6 +33,8 @@ const ProjectForm = {
         label: "Venue",
         help: "",
         value: "",
+        type: "text",
+        notes: "no",
         required: true,
         error: false,
         validator: blankValidator
@@ -36,6 +42,8 @@ const ProjectForm = {
         id: "presenter",
         label: "Presenter",
         help: "",
+        type: "text",
+        notes: "no",
         required: false,
         error: false,
         validator: blankValidator
@@ -45,6 +53,8 @@ const ProjectForm = {
         help:
           "(total pay for the gig, minus travel, per diem, expenses)",
         value: "",
+        type: "currency",
+        notes: "no",
         required: true,
         error: false,
         validator: blankValidator
@@ -54,6 +64,8 @@ const ProjectForm = {
         help:
           '(Rehearsals+Performances, if commission write "commission")',
         value: "",
+        type: "number",
+        notes: "yes",
         required: true,
         error: false,
         validator: blankValidator
@@ -63,6 +75,8 @@ const ProjectForm = {
         help:
           "",
         value: "",
+        type: "number",
+        notes: "yes",
         required: false,
         error: false,
         validator: blankValidator
@@ -72,6 +86,8 @@ const ProjectForm = {
         help:
           '',
         value: "",
+        type: "radio",
+        notes: "no",
         required: false,
         error: false,
         validator: blankValidator
@@ -81,6 +97,8 @@ const ProjectForm = {
         help:
           "",
         value: "",
+        type: "select",
+        notes: "no",
         required: false,
         error: false,
         validator: blankValidator
@@ -89,6 +107,8 @@ const ProjectForm = {
         label: "Was this a Union gig?",
         help: "",
         value: "",
+        type: "radio",
+        notes: "no",
         required: false,
         error: false,
         validator: blankValidator
@@ -98,6 +118,8 @@ const ProjectForm = {
         help:
           "",
         value: "",
+        type: "radio",
+        notes: "yes",
         required: false,
         error: false,
         validator: blankValidator
@@ -108,6 +130,8 @@ const ProjectForm = {
         help:
           "",
         value: "",
+        type: "radio",
+        notes: "yes",
         required: false,
         error: false,
         validator: blankValidator
@@ -118,6 +142,8 @@ const ProjectForm = {
         help:
           "",
         value: "",
+        type: "radio",
+        notes: "yes",
         required: false,
         error: false,
         validator: blankValidator
@@ -127,6 +153,8 @@ const ProjectForm = {
         help:
           "",
         value: "",
+        type: "radio",
+        notes: "yes",
         required: false,
         error: false,
         validator: blankValidator

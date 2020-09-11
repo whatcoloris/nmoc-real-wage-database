@@ -7,7 +7,7 @@ class FormFooter extends React.Component {
     return (
       <Typography className="wantsToHelp" component="p">
         If you would like to become involved in the 
-        New Music Organizing Caucus, visit: 
+        New Music Organizing Caucus, visit:&nbsp;
         <a href="https://newmusicorganizingcaucus.org"
             target="_blank"
             rel="noopener noreferrer">https://newmusicorganizingcaucus.org</a>
