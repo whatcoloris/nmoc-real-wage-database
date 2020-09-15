@@ -15,7 +15,7 @@ const styles = (theme) =>
 class FormField extends React.Component {
   render() {
     const { classes } = this.props;
-    console.log(this.props.type);
+    //console.log(this.props.type);
       return (
         <div className={classes.root}>
           <Typography variant="h6" component="h6" className={classes.label}>

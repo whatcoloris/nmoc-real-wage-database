@@ -1,7 +1,14 @@
+const dotenv = require('dotenv');
+const path = {path:__dirname+'/../process.env'};
+dotenv.config(path);
+console.log(path);
+
 const aws = require('aws-sdk');
-const spacesEndpoint = new aws.Endpoint('https://dynamodb.us-east-2.amazonaws.com');
+const spacesEndpoint = new aws.Endpoint('nyc3.digitaloceanspaces.com');
 const s3 = new aws.S3({
-  endpoint: spacesEndpoint
+  endpoint: spacesEndpoint,
+  accessKeyId: process.env.ACCESS_KEY,
+  secretAccessKey: process.env.SECRET_KEY
 });
 
 

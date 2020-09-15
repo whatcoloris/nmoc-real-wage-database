@@ -1,12 +1,19 @@
+const dotenv = require('dotenv');
+const path = {path:__dirname+'/../process.env'};
+dotenv.config(path);
+console.log(path);
+
 const aws = require('aws-sdk');
-const spacesEndpoint = new aws.Endpoint('https://dynamodb.us-east-2.amazonaws.com');
+const spacesEndpoint = new aws.Endpoint('nyc3.digitaloceanspaces.com');
 const s3 = new aws.S3({
-  endpoint: spacesEndpoint
+  endpoint: spacesEndpoint,
+  accessKeyId: process.env.ACCESS_KEY,
+  secretAccessKey: process.env.SECRET_KEY
 });
 
 
 let keys = [];
-  s3.listObjects({Bucket:'nmoc', Prefix: 'wages/'})
+s3.listObjects({Bucket:'nmoc', Prefix: 'wages/'})
   .on('success', function handlePage(item) {
     item.data.Contents.forEach(function(item) {
       if(item.Key.match(/.json/)){
@@ -46,30 +53,30 @@ let keys = [];
       );
     });
 
-    Promise.all(promises).then( function(data) {
-      console.log('promises data:', data);
-      const json2csv = require('json2csv').parse;
-      const fields = data[0].project_form.items.map( (item, idx) => ({label: item.id, value: `project_form.items.${idx}.value`, default: 'NULL'}) )
-      fields.push({label: 'already_submitted', value: 'project_form.already_submitted', default: 'NULL'})
-      fields.push({label: 'validationError', value: 'validationError', default: 'NO'})
-      
-      try {
-        // console.log('data:',data)
-        const csv = json2csv(data, { fields });
-        console.log('CSV:,', csv);
-        // res.send(csv);
-      } catch (err) {
-        console.error('csv err:',err);
-        // res.json({error: err});
-      }
+Promise.all(promises).then( function(data) {
+  console.log('promises data:', data);
+  const json2csv = require('json2csv').parse;
+  const fields = data[0].project_form.items.map( (item, idx) => ({label: item.id, value: `project_form.items.${idx}.value`, default: 'NULL'}) )
+  fields.push({label: 'already_submitted', value: 'project_form.already_submitted', default: 'NULL'})
+  fields.push({label: 'validationError', value: 'validationError', default: 'NO'})
+  
+  try {
+    // console.log('data:',data)
+    const csv = json2csv(data, { fields });
+    console.log('CSV:,', csv);
+    // res.send(csv);
+  } catch (err) {
+    console.error('csv err:',err);
+    // res.json({error: err});
+  }
 
-      
-    }).catch( function(err) {
-      console.log('caught err', err)
-      // res.json({error: err});
-    });
-    
-  }).send();
+  
+}).catch( function(err) {
+  console.log('caught err', err)
+  // res.json({error: err});
+});
+
+}).send();
 
 
 

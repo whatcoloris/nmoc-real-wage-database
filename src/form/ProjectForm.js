@@ -13,117 +13,150 @@ const ProjectForm = {
         help: "(city, state) of this place of work:",
         value: "",
         type: "location",
-        notes: "no",
         required: true,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
         id: "ensemble",
         label: "Ensemble",
         help:
           "",
         value: "",
         type: "text",
-        notes: "no",
         required: true,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
         id: "venue",
         label: "Venue",
         help: "",
         value: "",
         type: "text",
-        notes: "no",
         required: true,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
         id: "presenter",
         label: "Presenter",
         help: "",
         type: "text",
-        notes: "no",
         required: false,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
         id: "pay",
         label: "Pay",
         help:
           "(total pay for the gig, minus travel, per diem, expenses)",
         value: "",
         type: "currency",
-        notes: "no",
         required: true,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
         id: "services_num",
         label: "Number of Services",
         help:
           '(Rehearsals+Performances, if commission write "commission")',
         value: "",
         type: "number",
-        notes: "yes",
         required: true,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
+        id: "services_num_notes",
+        label: "",
+        help:
+          '',
+        value: "",
+        type: "notes",
+        required: false,
+        error: false,
+        validator: blankValidator
+      },
+      {
         id: "services_avg",
         label: "Average Length of Services",
         help:
           "",
         value: "",
         type: "number",
-        notes: "yes",
         required: false,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
+        id: "services_avg_notes",
+        label: "",
+        help:
+          "",
+        value: "",
+        type: "notes",
+        required: false,
+        error: false,
+        validator: blankValidator
+      },
+      {
         id: "contract",
         label: "Was there a contract?",
         help:
           '',
         value: "",
         type: "radio",
-        notes: "no",
         required: false,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
         id: "gig_type",
         label: "Was this gig W2, 1099, or neither?",
         help:
           "",
         value: "",
         type: "select",
-        notes: "no",
         required: false,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
         id: "gig_union",
         label: "Was this a Union gig?",
         help: "",
         value: "",
         type: "radio",
-        notes: "no",
         required: false,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
         id: "paid_on_time",
         label: "Were you paid on time as per your agreement with your employer? If no formal agreement was made, were you paid within a reasonable period of time?",
         help:
           "",
         value: "",
         type: "radio",
-        notes: "yes",
         required: false,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
+        id: "paid_on_time_note",
+        label: "",
+        help:
+          "",
+        value: "",
+        type: "notes",
+        required: false,
+        error: false,
+        validator: blankValidator
+      },
+      {
         id: "per_diem",
         label:
           "Were you paid a per diem? If so, how much?",
@@ -131,7 +164,18 @@ const ProjectForm = {
           "",
         value: "",
         type: "radio",
-        notes: "yes",
+        required: false,
+        error: false,
+        validator: blankValidator
+      },
+      {
+        id: "per_diem_notes",
+        label:
+          "",
+        help:
+          "",
+        value: "",
+        type: "notes",
         required: false,
         error: false,
         validator: blankValidator
@@ -143,18 +187,39 @@ const ProjectForm = {
           "",
         value: "",
         type: "radio",
-        notes: "yes",
         required: false,
         error: false,
         validator: blankValidator
-      },{
+      },
+      {
+        id: "extra_work_notes",
+        label: "",
+        help:
+          "",
+        value: "",
+        type: "notes",
+        required: false,
+        error: false,
+        validator: blankValidator
+      },
+      {
         id: "red_flag",
         label: 'Would you "red flag" this gig?',
         help:
           "",
         value: "",
         type: "radio",
-        notes: "yes",
+        required: false,
+        error: false,
+        validator: blankValidator
+      },
+      {
+        id: "red_flag_notes",
+        label: '',
+        help:
+          "",
+        value: "",
+        type: "notes",
         required: false,
         error: false,
         validator: blankValidator

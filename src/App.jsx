@@ -11,7 +11,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -304,26 +303,25 @@ class App extends React.Component {
                       fullWidth
                       startAdornment={<InputAdornment position="start">$</InputAdornment>}
                     />}
-                  {field.notes === "yes" &&
-                    <div>
-                      <TextField
-                      value=""
-                      label="Notes: "
-                      id={field.id+"_notes"}
-                      type="text"
-                      className={classes.textField}
-                      onChange={(event) => this.handleChange(event, idx)}
-                      placeholder="Extra information regarding this question"
-                      InputLabelProps={{
-                        shrink: true
-                      }}
-                      margin="normal"
-                      rowsMax={field.id === "description" ? 32 : 1}
-                      multiline={field.id === "description"}
-                      helperText={field.helperText}
-                      error={field.error}
-                      fullWidth />
-                    </div>}
+                  {field.type === "notes" &&
+                    <TextField
+                    value={field.value}
+                    label="Notes: "
+                    id={field.id}
+                    type={this.inputTypeFor(field.id)}
+                    className={classes.textField}
+                    onChange={(event) => this.handleChange(event, idx)}
+                    placeholder="Extra information regarding this question"
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    margin="normal"
+                    required={field.required}
+                    rowsMax={field.id === "description" ? 32 : 1}
+                    multiline={field.id === "description"}
+                    helperText={field.helperText}
+                    error={field.error}
+                    fullWidth />}
                 </FormField>
               ))}
               
